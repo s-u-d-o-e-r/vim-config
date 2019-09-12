@@ -1,0 +1,18 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "Markdown",
+    "javascript",
+    "html",
+    "json"
+  ],
+  "prettier.printWidth": 120,
+  "prettier.tabWidth": 4,
+  "prettier.eslintIntegration": true,
+  "prettier.singleQuote": true,
+  "suggest.noselect": false,
+  "suggest.autoTrigger": "always",
+  "suggest.timeout": 500,
+  "suggest.acceptSuggestionOnCommitCharacter": true,
+  "suggest.echodocSupport": true
+}
