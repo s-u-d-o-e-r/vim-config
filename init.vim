@@ -21,13 +21,14 @@ call plug#begin("~/.vim/plugged")
     Plug 'honza/vim-snippets'
     Plug 'scrooloose/nerdTree'
     Plug 'ctrlpvim/ctrlp.vim'
-    Plug 'bling/vim-airline'
-
+   " Plug 'bling/vim-airline'
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
     Plug 'Shougo/neosnippet.vim'
     Plug 'Shougo/neosnippet-snippets'
     Plug 'Shougo/echodoc.vim'
     Plug 'Xuyuanp/nerdtree-git-plugin'
-
+    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
     Plug 'xolox/vim-misc'
     Plug 'xolox/vim-session'
 
@@ -72,11 +73,6 @@ set nocompatible              " be iMproved, required
 set number
 set noswapfile
 set smartcase
-" Turn off statusbar, because it is externalized
-"set noshowmode
-"set noruler
-"set laststatus=0
-
 
 set hidden
 set wildmenu
@@ -283,4 +279,22 @@ let g:NERDTreeChDirMode=2
 " view current buffer in nerdtree
 nmap <leader>r :NERDTreeFind<cr>
 
- 
+ " Ctrl+h/l move cursor to the start/end of the line
+nmap <c-l> $
+omap <c-l> $
+vmap <c-h> ^
+vmap <c-l> $
+nmap <c-h> ^
+" Ctrl+h/j/k/l act as arrow keys in insert mode
+imap <c-k> <Up>
+imap <c-l> <Right>
+imap <c-j> <Down>
+imap <c-h> <Left>
+
+
+" Ctrl+Enter inserts a newline below the cursor in insert mode (not altering
+" text after cursor)
+imap <c-Enter> <c-o>o
+" Shift+Enter inserts a newline above the cursor in insert mode (not altering
+" text after cursor)
+imap <s-Enter> <c-o><s-o>
