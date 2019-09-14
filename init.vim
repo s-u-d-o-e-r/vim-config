@@ -21,8 +21,7 @@ call plug#begin("~/.vim/plugged")
     Plug 'honza/vim-snippets'
     Plug 'scrooloose/nerdTree'
     Plug 'ctrlpvim/ctrlp.vim'
-   " Plug 'bling/vim-airline'
-    Plug 'vim-airline/vim-airline'
+    Plug 'bling/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'Shougo/neosnippet.vim'
     Plug 'Shougo/neosnippet-snippets'
@@ -31,11 +30,12 @@ call plug#begin("~/.vim/plugged")
     Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
     Plug 'xolox/vim-misc'
     Plug 'xolox/vim-session'
-
+    Plug 'ryanoasis/vim-devicons'
 call plug#end()
-
-
-imap <C-v> <C-O>"+p
+      
+imap <C-v> <Esc>"+pa
+nmap <C-v> "+p
+vmap <C-v> xh"+pi
 
 vnoremap <C-c> "+y
 
