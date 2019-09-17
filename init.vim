@@ -31,8 +31,18 @@ call plug#begin("~/.vim/plugged")
     Plug 'xolox/vim-misc'
     Plug 'xolox/vim-session'
     Plug 'ryanoasis/vim-devicons'
-call plug#end()
-      
+    Plug 'heavenshell/vim-jsdoc'
+    Plug 'vim-syntastic/syntastic'
+    call plug#end()
+
+
+"config JsDoc
+nmap <silent> <C-l> <Plug>(jsdoc)
+let g:jsdoc_allow_input_prompt = 1 
+let g:jsdoc_input_description = 1
+let g:jsdoc_enable_es6 = 1
+let g:jsdoc_param_description_separator = ' => '
+" config for ctrl+p, ctrl+v, ctrl+x   
 imap <C-v> <Esc>"+pa
 nmap <C-v> "+p
 vmap <C-v> xh"+pi
@@ -41,7 +51,8 @@ vnoremap <C-c> "+y
 
 vnoremap <C-x> "+d
 
-
+"for formatting
+autocmd CursorHold * silent syntax sync fromstart
 
 "session config
 let g:session_autoload = 'yes'
@@ -276,15 +287,29 @@ call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
 call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
 
 let g:NERDTreeChDirMode=2
+
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹  ",
+    \ "Staged"    : "✚  ",
+    \ "Untracked" : "✭  ",
+    \ "Renamed"   : "➜   ",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖  ",
+    \ "Dirty"     : "✗  ",
+    \ "Clean"     : "✔︎   ",
+    \ 'Ignored'   : '☒ ',
+    \ "Unknown"   : "?"
+    \ }
+
 " view current buffer in nerdtree
 nmap <leader>r :NERDTreeFind<cr>
 
  " Ctrl+h/l move cursor to the start/end of the line
-nmap <c-l> $
-omap <c-l> $
-vmap <c-h> ^
-vmap <c-l> $
-nmap <c-h> ^
+"nmap <c-l> $
+"omap <c-l> $
+"vmap <c-h> ^
+"vmap <c-l> $
+"nmap <c-h> ^
 " Ctrl+h/j/k/l act as arrow keys in insert mode
 imap <c-k> <Up>
 imap <c-l> <Right>

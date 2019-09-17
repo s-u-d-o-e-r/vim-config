@@ -14,5 +14,9 @@
   "suggest.autoTrigger": "always",
   "suggest.timeout": 500,
   "suggest.acceptSuggestionOnCommitCharacter": true,
-  "suggest.echodocSupport": true
+  "suggest.echodocSupport": true,
+  "eslint.autoFixOnSave": true,
+  "eslint.codeAction.showDocumentation": {
+    "enable": true
+  }
 }
