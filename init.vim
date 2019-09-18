@@ -10,7 +10,7 @@ call plug#begin("~/.vim/plugged")
     Plug 'AndrewRadev/splitjoin.vim'
     Plug 'inkarkat/vim-CountJump'
     Plug 'inkarkat/vim-ingo-library'
-    "Plug 'w0rp/ale'
+    Plug 'w0rp/ale'
     Plug 'kana/vim-textobj-user'
     Plug 'Julian/vim-textobj-variable-segment'
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -35,6 +35,14 @@ call plug#begin("~/.vim/plugged")
     Plug 'vim-syntastic/syntastic'
     call plug#end()
 
+
+" Ale settings
+let g:ale_fixers = {
+ \ 'javascript': ['eslint']
+ \ }
+"let g:ale_sign_error = ''
+"let g:ale_sign_warning = '⚠️'
+let g:ale_fix_on_save = 1
 
 "config JsDoc
 nmap <silent> <C-l> <Plug>(jsdoc)
@@ -72,10 +80,10 @@ endif
 " For Neovim 0.1.3 and 0.1.4
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
-
 " List occurrences for search
 
 colorscheme night-owl
+
 
 filetype indent plugin on
 syntax on
@@ -272,32 +280,32 @@ function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
  exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
 endfunction
 
-call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
-call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
-call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
-call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
-call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+call NERDTreeHighlightFile('jade', 'green', 'none', 'green', 'none')
+call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', 'none')
+call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', 'none')
+call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', 'none')
+call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', 'none')
+call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', 'none')
+call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', 'none')
+call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', 'none')
+call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', 'none')
+call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', 'none')
+call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', 'none')
+call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', 'none')
+call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', 'none')
 
 let g:NERDTreeChDirMode=2
 
 let g:NERDTreeIndicatorMapCustom = {
-    \ "Modified"  : "✹  ",
-    \ "Staged"    : "✚  ",
-    \ "Untracked" : "✭  ",
-    \ "Renamed"   : "➜   ",
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
     \ "Unmerged"  : "═",
-    \ "Deleted"   : "✖  ",
-    \ "Dirty"     : "✗  ",
-    \ "Clean"     : "✔︎   ",
-    \ 'Ignored'   : '☒ ',
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ 'Ignored'   : '☒',
     \ "Unknown"   : "?"
     \ }
 
@@ -323,3 +331,16 @@ imap <c-Enter> <c-o>o
 " Shift+Enter inserts a newline above the cursor in insert mode (not altering
 " text after cursor)
 imap <s-Enter> <c-o><s-o>
+
+
+
+hi! Normal guibg=NONE
+hi! NonText guibg=NONE guifg=white
+hi! CursorLine guibg=NONE
+hi! NonText guibg=NONE
+hi! EndOfBuffer guibg=NONE
+hi! LineNr guibg=NONE guifg=#dedede
+hi! CursorLineNr guibg=NONE guifg=#dedede
+hi! SignColumn guibg=NONE
+hi! statusline ctermfg=NONE
+
