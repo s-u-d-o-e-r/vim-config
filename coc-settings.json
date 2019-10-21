@@ -4,6 +4,7 @@
     "Markdown",
     "javascript",
     "html",
+    "javascriptreact",
     "json"
   ],
   "prettier.printWidth": 120,

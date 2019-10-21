@@ -59,6 +59,11 @@ vnoremap <C-c> "+y
 
 vnoremap <C-x> "+d
 
+noremap y "*y
+noremap p "*p
+noremap Y "+y
+noremap P "+p
+
 "for formatting
 autocmd CursorHold * silent syntax sync fromstart
 
@@ -125,7 +130,7 @@ set guioptions-=r
 set guioptions-=L
 au GUIEnter * simalt ~x
 au BufNewFile,BufRead *.ejs set filetype=html
-let g:python3_host_prog="/usr/bin/python3"
+let g:python3_host_prog="/usr/local/bin/python3"
 set nocompatible
 set smartcase
 set noshowmode
@@ -223,6 +228,12 @@ augroup mygroup
   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+
+  "let g:shouldCopyToClipBoard = 0
+  "autocmd FocusLost * if g:shouldCopyToClipBoard | let @c = @+ | let @+ = @" | let g:shouldCopyToClipBoard = 0 | endif
+  "autocmd TextYankPost * let g:shouldCopyToClipBoard = 1
+  "autocmd TextChanged,TextChangedI,CursorMoved * let g:shouldCopyToClipBoard = 0
+
 augroup end
 
 " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
