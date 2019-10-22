@@ -33,8 +33,8 @@ call plug#begin("~/.vim/plugged")
     Plug 'ryanoasis/vim-devicons'
     Plug 'heavenshell/vim-jsdoc'
     Plug 'vim-syntastic/syntastic'
+    Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
     call plug#end()
-
 
 " Ale settings
 let g:ale_fixers = {
@@ -221,7 +221,7 @@ nmap <leader>rn <Plug>(coc-rename)
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
-
+let g:emmetJsx = 1
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s).
@@ -233,6 +233,21 @@ augroup mygroup
   "autocmd FocusLost * if g:shouldCopyToClipBoard | let @c = @+ | let @+ = @" | let g:shouldCopyToClipBoard = 0 | endif
   "autocmd TextYankPost * let g:shouldCopyToClipBoard = 1
   "autocmd TextChanged,TextChangedI,CursorMoved * let g:shouldCopyToClipBoard = 0
+
+
+
+autocmd CursorMoved,CursorMovedI,BufEnter *
+\   if exists('*IsStyledDefinition') |
+\     if IsStyledDefinition(line('.')) && g:emmetJsx |
+\       call coc#config('emmet.includeLanguages', { "javascript": "css" } ) |
+\       let g:emmetJsx = 0 |
+\     elseif !IsStyledDefinition(line('.')) && !g:emmetJsx |
+\       call coc#config('emmet.includeLanguages', { "javascript": "javascriptreact" } ) |
+\       let g:emmetJsx = 1 |
+\     endif |
+\   endif
+
+
 
 augroup end
 
