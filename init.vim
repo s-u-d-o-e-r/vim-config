@@ -19,7 +19,8 @@ call plug#begin("~/.vim/plugged")
     Plug 'mileszs/ack.vim'
     Plug 'sheerun/vim-polyglot'
     Plug 'honza/vim-snippets'
-    Plug 'scrooloose/nerdTree'
+    "Plug 'scrooloose/nerdTree'
+    
     Plug 'ctrlpvim/ctrlp.vim'
     Plug 'bling/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
@@ -41,7 +42,7 @@ let g:ale_fixers = {
  \ 'javascript': ['eslint']
  \ }
 "let g:ale_sign_error = ''
-"let g:ale_sign_warning = '⚠️'
+let g:ale_sign_warning = '⚠️'
 let g:ale_fix_on_save = 1
 
 "config JsDoc
@@ -183,8 +184,8 @@ inoremap <silent><expr> <c-space> coc#refresh()
 " Coc only does snippet and additional edit on confirm.
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-nmap <C-n> :NERDTreeToggle<CR>
-
+"nmap <C-n> :NERDTreeToggle<CR>
+nmap <C-n> :CocCommand explorer<CR>
 " Use `[c` and `]c` to navigate diagnostics
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
 nmap <silent> ]c <Plug>(coc-diagnostic-next)
