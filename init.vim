@@ -3,7 +3,8 @@ call plug#begin("~/.vim/plugged")
     Plug 'tpope/vim-repeat'
     Plug 'inkarkat/vim-visualrepeat'
     Plug 'yuttie/comfortable-motion.vim'
-    " Plug 'arcticicestudio/nord-vim'
+    "Plug 'arcticicestudio/nord-vim'
+    Plug 'flrnprz/candid.vim'
     Plug 'mileszs/ack.vim'
     Plug 'tpope/vim-fugitive'
     "Plug 'pangloss/vim-javascript'
@@ -15,7 +16,7 @@ call plug#begin("~/.vim/plugged")
     Plug 'Julian/vim-textobj-variable-segment'
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'haishanh/night-owl.vim'
+    " Plug 'haishanh/night-owl.vim'
     Plug 'mileszs/ack.vim'
     Plug 'sheerun/vim-polyglot'
     Plug 'honza/vim-snippets'
@@ -37,6 +38,13 @@ call plug#begin("~/.vim/plugged")
     Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
     call plug#end()
 
+
+
+
+
+  imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+	smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+  xmap <C-k>     <Plug>(neosnippet_expand_target)
 " Ale settings
 let g:ale_fixers = {
  \ 'javascript': ['eslint']
@@ -78,6 +86,12 @@ let g:session_verbose_messages = 0
 "airline config
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
+let g:airline_theme='deus'
+
+
+
+
+
 " If you have vim >=8.0 or Neovim >= 0.1.5
 if (has("termguicolors"))
  set termguicolors
@@ -88,7 +102,7 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 " List occurrences for search
 
-colorscheme night-owl
+colorscheme candid
 
 
 filetype indent plugin on
@@ -345,11 +359,13 @@ nmap <leader>r :NERDTreeFind<cr>
 "vmap <c-h> ^
 "vmap <c-l> $
 "nmap <c-h> ^
+
+
 " Ctrl+h/j/k/l act as arrow keys in insert mode
-imap <c-k> <Up>
-imap <c-l> <Right>
-imap <c-j> <Down>
-imap <c-h> <Left>
+"imap <c-k> <Up>
+"imap <c-l> <Right>
+"imap <c-j> <Down>
+"imap <c-h> <Left>
 
 
 " Ctrl+Enter inserts a newline below the cursor in insert mode (not altering
@@ -361,13 +377,13 @@ imap <s-Enter> <c-o><s-o>
 
 
 
-hi! Normal guibg=NONE
-hi! NonText guibg=NONE guifg=white
-hi! CursorLine guibg=NONE
-hi! NonText guibg=NONE
-hi! EndOfBuffer guibg=NONE
-hi! LineNr guibg=NONE guifg=#dedede
-hi! CursorLineNr guibg=NONE guifg=#dedede
-hi! SignColumn guibg=NONE
-hi! statusline ctermfg=NONE
+"hi! Normal guibg=NONE
+"hi! NonText guibg=NONE guifg=white
+"hi! CursorLine guibg=NONE
+"hi! NonText guibg=NONE
+"hi! EndOfBuffer guibg=NONE
+"hi! LineNr guibg=NONE guifg=#dedede
+"hi! CursorLineNr guibg=NONE guifg=#dedede
+"hi! SignColumn guibg=NONE
+"hi! statusline ctermfg=NONE
 
