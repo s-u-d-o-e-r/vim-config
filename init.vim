@@ -7,6 +7,8 @@ call plug#begin("~/.vim/plugged")
     Plug 'flrnprz/candid.vim'
     Plug 'mileszs/ack.vim'
     Plug 'tpope/vim-fugitive'
+    " React code snippets
+    Plug 'epilande/vim-react-snippets'
     "Plug 'pangloss/vim-javascript'
     Plug 'AndrewRadev/splitjoin.vim'
     Plug 'inkarkat/vim-CountJump'
@@ -40,7 +42,8 @@ call plug#begin("~/.vim/plugged")
 
 
 
-
+" Trigger configuration (Optional)
+ let g:UltiSnipsExpandTrigger="<C-l>"
 
   imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 	smap <C-k>     <Plug>(neosnippet_expand_or_jump)

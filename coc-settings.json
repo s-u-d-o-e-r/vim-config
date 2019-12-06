@@ -21,17 +21,21 @@
     "enable": true
   },
   "explorer.icon.enableNerdfont": true,
-  "explorer.keyMappings": {
+
+  "explorer.keyMappings":{
+    "k": "nodePrev",
+    "j": "nodeNext",
+
     "*": "toggleSelection",
     "<tab>": "actionMenu",
 
-    "h": "shrink",
+    "h": "collapse",
     "l": "expand",
     "J": ["toggleSelection", "normal:j"],
     "K": ["toggleSelection", "normal:k"],
     "gl": "expandRecursive",
-    "gh": "shrinkRecursive",
-    "o": "expandOrShrink",
+    "gh": "collapseRecursive",
+    "o": "expandOrCollapse",
     "<cr>": "open",
     "e": "open",
     "E": "openInVsplit",
@@ -74,5 +78,4 @@
     "]c": "gitNext",
     "<<": "gitStage",
     ">>": "gitUnstage"
-  }
-}
+  } }
