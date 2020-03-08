@@ -4,7 +4,7 @@ call plug#begin("~/.vim/plugged")
     Plug 'tpope/vim-repeat'
     Plug 'inkarkat/vim-visualrepeat'
     Plug 'yuttie/comfortable-motion.vim'
-    "Plug 'arcticicestudio/nord-vim'
+    Plug 'arcticicestudio/nord-vim'
     Plug 'flrnprz/candid.vim'
     Plug 'mileszs/ack.vim'
     Plug 'tpope/vim-fugitive'
@@ -19,7 +19,7 @@ call plug#begin("~/.vim/plugged")
     Plug 'Julian/vim-textobj-variable-segment'
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    " Plug 'haishanh/night-owl.vim'
+    Plug 'haishanh/night-owl.vim'
     Plug 'liuchengxu/vim-which-key'
     Plug 'AndrewRadev/splitjoin.vim'
     Plug 'kristijanhusak/vim-carbon-now-sh'
@@ -53,13 +53,17 @@ call plug#begin("~/.vim/plugged")
     Plug 'tpope/vim-unimpaired'
     Plug 'mbbill/undotree'
     Plug 'tpope/vim-commentary'
+ 
     call plug#end()
 
 
 
+let g:carbon_now_sh_options =
+\ { 'ln': 'false',
+  \ 'fm': 'Fira Code',
+  \ 't':'oceanic-next'}
 
-
-
+vnoremap <F3> :CarbonNowSh<CR>
 nnoremap <F5> :UndotreeToggle<cr>
 
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
