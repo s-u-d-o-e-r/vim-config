@@ -1,5 +1,6 @@
 call plug#begin("~/.vim/plugged")
     Plug 'tpope/vim-surround'
+    Plug 'jiangmiao/auto-pairs'
     Plug 'tpope/vim-repeat'
     Plug 'inkarkat/vim-visualrepeat'
     Plug 'yuttie/comfortable-motion.vim'
@@ -19,11 +20,19 @@ call plug#begin("~/.vim/plugged")
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     " Plug 'haishanh/night-owl.vim'
+    Plug 'liuchengxu/vim-which-key'
+    Plug 'AndrewRadev/splitjoin.vim'
+    Plug 'kristijanhusak/vim-carbon-now-sh'
+    Plug 'rbong/vim-flog'
+    Plug 'haya14busa/incsearch.vim'
+    Plug 'inkarkat/vim-visualrepeat'
+    "Plug 'wellle/context.vim'
+    Plug 'inkarkat/vim-ingo-library'
     Plug 'mileszs/ack.vim'
     Plug 'sheerun/vim-polyglot'
     Plug 'honza/vim-snippets'
     "Plug 'scrooloose/nerdTree'
-    
+    Plug 'tveskag/nvim-blame-line'
     Plug 'ctrlpvim/ctrlp.vim'
     Plug 'bling/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
@@ -38,16 +47,24 @@ call plug#begin("~/.vim/plugged")
     Plug 'heavenshell/vim-jsdoc'
     Plug 'vim-syntastic/syntastic'
     Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+    Plug 'jparise/vim-graphql'
+    Plug 'liuchengxu/vim-clap'
+    Plug 'drewtempelmeyer/palenight.vim'
+    Plug 'tpope/vim-unimpaired'
+    Plug 'mbbill/undotree'
+    Plug 'tpope/vim-commentary'
     call plug#end()
 
 
 
-" Trigger configuration (Optional)
- let g:UltiSnipsExpandTrigger="<C-l>"
 
-  imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-	smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-  xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+
+nnoremap <F5> :UndotreeToggle<cr>
+
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
 " Ale settings
 let g:ale_fixers = {
  \ 'javascript': ['eslint']
@@ -55,6 +72,9 @@ let g:ale_fixers = {
 "let g:ale_sign_error = ''
 let g:ale_sign_warning = '⚠️'
 let g:ale_fix_on_save = 1
+
+
+let g:blameLineVirtualTextPrefix = '|>'
 
 "config JsDoc
 nmap <silent> <C-l> <Plug>(jsdoc)
@@ -79,6 +99,7 @@ noremap P "+p
 "for formatting
 autocmd CursorHold * silent syntax sync fromstart
 
+let g:blamer_delay = 500
 "session config
 let g:session_autoload = 'yes'
 let g:session_autosave = 'yes'
@@ -92,6 +113,8 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme='deus'
 
 
+nmap <S-Right> ]b
+nmap <S-Left> [b
 
 
 
@@ -105,8 +128,7 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 " List occurrences for search
 
-colorscheme candid
-
+colorscheme palenight
 
 filetype indent plugin on
 syntax on
@@ -164,7 +186,7 @@ nmap <C-S> :w<CR>
 imap <C-S> <C-O>:w<CR>
 set backupdir=~/.local/share/nvim/backup
 
-command -nargs=? -complete=file Todo execute "Ack" 'TODO\|FIXME\|XXX' <f-args>
+command! -nargs=? -complete=file Todo execute "Ack" 'TODO\|FIXME\|XXX' <f-args>
 " Some servers have issues with backup files, see #649
 set nobackup
 set nowritebackup
@@ -242,15 +264,13 @@ nmap <leader>f  <Plug>(coc-format-selected)
 let g:emmetJsx = 1
 augroup mygroup
   autocmd!
+  autocmd BufEnter * EnableBlameLine
   " Setup formatexpr specified filetype(s).
   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 
-  "let g:shouldCopyToClipBoard = 0
-  "autocmd FocusLost * if g:shouldCopyToClipBoard | let @c = @+ | let @+ = @" | let g:shouldCopyToClipBoard = 0 | endif
-  "autocmd TextYankPost * let g:shouldCopyToClipBoard = 1
-  "autocmd TextChanged,TextChangedI,CursorMoved * let g:shouldCopyToClipBoard = 0
+ autocmd FileType apache setlocal commentstring=#\ %s
 
 
 
@@ -265,7 +285,10 @@ autocmd CursorMoved,CursorMovedI,BufEnter *
 \     endif |
 \   endif
 
-
+autocmd CursorMoved,BufEnter *
+\   if &filetype == "coc-explorer" |
+\     execute "norm 0" |
+\   endif
 
 augroup end
 
@@ -313,10 +336,15 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
-"Prettier cfg
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-vmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+
+map <leader>fs :CocCommand eslint.executeAutofix<CR>
+
+map <leader>ff :CocCommand prettier.formatFile<CR>
+
+
+map <leader>fa <leader>xs<leader>xf
+
+
 
 " NERDTress File highlighting
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
@@ -365,14 +393,14 @@ nmap <leader>r :NERDTreeFind<cr>
 
 
 " Ctrl+h/j/k/l act as arrow keys in insert mode
-"imap <c-k> <Up>
-"imap <c-l> <Right>
-"imap <c-j> <Down>
-"imap <c-h> <Left>
+" imap <C-k> <Up>
+" imap <C-l> <Right>
+" imap <C-j> <Down>
+" imap <C-h> <Left>
 
 
 " Ctrl+Enter inserts a newline below the cursor in insert mode (not altering
-" text after cursor)
+" text after uursor)
 imap <c-Enter> <c-o>o
 " Shift+Enter inserts a newline above the cursor in insert mode (not altering
 " text after cursor)
