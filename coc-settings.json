@@ -7,6 +7,7 @@
     "javascriptreact",
     "json"
   ],
+
   "prettier.printWidth": 120,
   "prettier.tabWidth": 4,
   "prettier.eslintIntegration": true,
@@ -21,26 +22,32 @@
     "enable": true
   },
   "explorer.icon.enableNerdfont": true,
+  "explorer.keyMappings": {
+    "i": "unmap",
 
-  "explorer.keyMappings":{
     "k": "nodePrev",
     "j": "nodeNext",
+    "gk": "expandablePrev",
+    "gj": "expandableNext",
 
     "*": "toggleSelection",
     "<tab>": "actionMenu",
 
     "h": "collapse",
-    "l": "expand",
-    "J": ["toggleSelection", "normal:j"],
-    "K": ["toggleSelection", "normal:k"],
+    "l": ["expandable?", "expand", "open"],
+    "J": ["toggleSelection", "nodeNext"],
+    "K": ["toggleSelection", "nodePrev"],
     "gl": "expandRecursive",
     "gh": "collapseRecursive",
     "o": "expandOrCollapse",
-    "<cr>": "open",
+    "<cr>": ["expandable?", "cd", "open"],
     "e": "open",
-    "E": "openInVsplit",
-    "t": "openInTab",
+    "s": "open:split",
+    "S": "open:split:plain",
+    "E": "open:vsplit",
+    "t": "open:tab",
     "<bs>": "gotoParent",
+    "gp": "preview:labeling",
 
     "y": "copyFilepath",
     "Y": "copyFilename",
@@ -59,6 +66,7 @@
 
     "?": "help",
     "q": "quit",
+    "<esc>": "esc",
     "X": "systemExecute",
     "gd": "listDrive",
 
@@ -78,4 +86,6 @@
     "]c": "gitNext",
     "<<": "gitStage",
     ">>": "gitUnstage"
-  } }
+  }
+
+  }

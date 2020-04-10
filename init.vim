@@ -8,6 +8,8 @@ call plug#begin("~/.vim/plugged")
     Plug 'flrnprz/candid.vim'
     Plug 'mileszs/ack.vim'
     Plug 'tpope/vim-fugitive'
+    Plug 'tkhren/vim-fake'
+    Plug 'Asheq/close-buffers.vim'
     " React code snippets
     Plug 'epilande/vim-react-snippets'
     "Plug 'pangloss/vim-javascript'
@@ -17,7 +19,8 @@ call plug#begin("~/.vim/plugged")
     Plug 'w0rp/ale'
     Plug 'kana/vim-textobj-user'
     Plug 'Julian/vim-textobj-variable-segment'
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'haishanh/night-owl.vim'
     Plug 'liuchengxu/vim-which-key'
@@ -30,7 +33,7 @@ call plug#begin("~/.vim/plugged")
     Plug 'inkarkat/vim-ingo-library'
     Plug 'mileszs/ack.vim'
     Plug 'sheerun/vim-polyglot'
-    Plug 'honza/vim-snippets'
+    "Plug 'honza/vim-snippets'
     "Plug 'scrooloose/nerdTree'
     Plug 'tveskag/nvim-blame-line'
     Plug 'ctrlpvim/ctrlp.vim'
@@ -48,27 +51,47 @@ call plug#begin("~/.vim/plugged")
     Plug 'vim-syntastic/syntastic'
     Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
     Plug 'jparise/vim-graphql'
-    Plug 'liuchengxu/vim-clap'
+    Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
     Plug 'drewtempelmeyer/palenight.vim'
     Plug 'tpope/vim-unimpaired'
     Plug 'mbbill/undotree'
     Plug 'tpope/vim-commentary'
- 
+    Plug 'mhinz/vim-startify'
+    Plug 'wakatime/vim-wakatime'
+    Plug 'mattn/vim-gist'
+    Plug 'airblade/vim-gitgutter'
+    Plug 'jremmen/vim-ripgrep'
+    Plug 'airblade/vim-rooter'
     call plug#end()
 
 
 
+
+let g:echodoc#enable_at_startup = 1
+let g:echodoc#type = 'popup'
+
+" gist
+let g:gist_detect_filetype = 1
+
+let g:gist_open_browser_after_post = 1
+let g:gist_post_private = 1
+
+"start page
+
+let g:startify_session_dir = "~/.vim/sessions"
+
+" screenshots
 let g:carbon_now_sh_options =
 \ { 'ln': 'false',
-  \ 'fm': 'Fira Code',
-  \ 't':'oceanic-next'}
+\ 'fm': 'Fira Code',
+\ 't':'night-owl'}
 
 vnoremap <F3> :CarbonNowSh<CR>
 nnoremap <F5> :UndotreeToggle<cr>
 
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
+"imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"xmap <C-k>     <Plug>(neosnippet_expand_target)
 " Ale settings
 let g:ale_fixers = {
  \ 'javascript': ['eslint']
@@ -86,10 +109,15 @@ let g:jsdoc_allow_input_prompt = 1
 let g:jsdoc_input_description = 1
 let g:jsdoc_enable_es6 = 1
 let g:jsdoc_param_description_separator = ' => '
-" config for ctrl+p, ctrl+v, ctrl+x   
-imap <C-v> <Esc>"+pa
-nmap <C-v> "+p
-vmap <C-v> xh"+pi
+" config for ctrl+p, ctrl+v, ctrl+x  
+
+nmap <C-S> :w<CR>
+imap <C-S> <C-O>:w<CR>
+
+
+imap <C-p> <Esc>"+pa
+"nmap <C-v> "+p
+"vmap <C-v> xh"+pi
 
 vnoremap <C-c> "+y
 
@@ -105,10 +133,12 @@ autocmd CursorHold * silent syntax sync fromstart
 
 let g:blamer_delay = 500
 "session config
-let g:session_autoload = 'yes'
+let g:session_autoload = 'no'
 let g:session_autosave = 'yes'
 let g:session_autosave_to = 'default'
 let g:session_verbose_messages = 0
+
+
 
 """"" enable 24bit true color
 "airline config
@@ -132,7 +162,7 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 " List occurrences for search
 
-colorscheme palenight
+colorscheme night-owl "palenight
 
 filetype indent plugin on
 syntax on
@@ -186,8 +216,7 @@ set undodir=$HOME/.vim/undo
 set undolevels=1000
 set undoreload=10000
 set updatetime=1000
-nmap <C-S> :w<CR>
-imap <C-S> <C-O>:w<CR>
+
 set backupdir=~/.local/share/nvim/backup
 
 command! -nargs=? -complete=file Todo execute "Ack" 'TODO\|FIXME\|XXX' <f-args>
@@ -293,6 +322,8 @@ autocmd CursorMoved,BufEnter *
 \   if &filetype == "coc-explorer" |
 \     execute "norm 0" |
 \   endif
+
+
 
 augroup end
 
@@ -422,3 +453,60 @@ imap <s-Enter> <c-o><s-o>
 "hi! SignColumn guibg=NONE
 "hi! statusline ctermfg=NONE
 
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command, '--preview', '~/.vim/plugged/fzf.vim/bin/preview.sh {}']}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+
+
+"Clap
+command! Cg Clap grep
+command! Cf Clap files
+
+
+
+
+" Fake
+
+"" Choose a random element from a list
+call fake#define('sex', 'fake#choice(["male", "female"])')
+
+"" Get a name of male or female
+"" fake#int(1) returns 0 or 1
+call fake#define('name', 'fake#int(1) ? fake#gen("male_name")'
+                                  \ . ' : fake#gen("female_name")')
+
+"" Get a full name
+call fake#define('fullname', 'fake#gen("name") . " " . fake#gen("surname")')
+
+"" Get a nonsense text like Lorem ipsum
+call fake#define('sentense', 'fake#capitalize('
+                        \ . 'join(map(range(fake#int(3,15)),"fake#gen(\"nonsense\")"))'
+                        \ . ' . fake#chars(1,"..............!?"))')
+
+call fake#define('paragraph', 'join(map(range(fake#int(3,10)),"fake#gen(\"sentense\")"))')
+
+"" Alias
+call fake#define('lipsum', 'fake#gen("paragraph")')
+
+"" Get an age weighted by generation distribution
+call fake#define('age', 'float2nr(floor(110 * fake#betapdf(1.0, 1.45)))')
+
+"" Get a domain (ordered by number of websites)
+call fake#define('gtld', 'fake#get(fake#load("gtld"),'
+                        \ . 'fake#betapdf(0.2, 3.0))')
+
+call fake#define('email', 'tolower(substitute(printf("%s@%s.%s",'
+                        \ . 'fake#gen("name"),'
+                        \ . 'fake#gen("surname"),'
+                        \ . 'fake#gen("gtld")), "\\s", "-", "g"))')
+
+
+
+" Buffers delete
+nnoremap <silent> <C-q> :Bdelete menu<CR>
