@@ -47,7 +47,8 @@ call plug#begin("~/.vim/plugged")
     Plug 'xolox/vim-misc'
     Plug 'xolox/vim-session'
     Plug 'ryanoasis/vim-devicons'
-    Plug 'heavenshell/vim-jsdoc'
+    "Plug 'heavenshell/vim-jsdoc'
+    Plug 'kkoomen/vim-doge'
     Plug 'vim-syntastic/syntastic'
     Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
     Plug 'jparise/vim-graphql'
@@ -104,11 +105,15 @@ let g:ale_fix_on_save = 1
 let g:blameLineVirtualTextPrefix = '|>'
 
 "config JsDoc
-nmap <silent> <C-l> <Plug>(jsdoc)
-let g:jsdoc_allow_input_prompt = 1 
-let g:jsdoc_input_description = 1
-let g:jsdoc_enable_es6 = 1
-let g:jsdoc_param_description_separator = ' => '
+
+
+
+"nmap <silent> <C-l> <Plug>(jsdoc)
+"let g:jsdoc_allow_input_prompt = 1 
+"let g:jsdoc_input_description = 1
+"let g:jsdoc_enable_es6 = 1
+"let g:jsdoc_param_description_separator = ' => '
+
 " config for ctrl+p, ctrl+v, ctrl+x  
 
 nmap <C-S> :w<CR>
@@ -328,11 +333,19 @@ autocmd CursorMoved,BufEnter *
 augroup end
 
 " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+"xmap <leader>a  <Plug>(coc-codeaction-selected)
+"nmap <leader>a  <Plug>(coc-codeaction-selected)
+" Remap for do codeAction of selected region
+function! s:cocActionsOpenFromSelected(type) abort
+  execute 'CocCommand actions.open ' . a:type
+endfunction
+xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
+nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
+
+
 
 " Remap for do codeAction of current line
-nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <silent> <leader>ac  :<C-u> CocCommand actions.open<cr>
 " Fix autofix problem of current line
 nmap <leader>qf  <Plug>(coc-fix-current)
 
@@ -467,8 +480,10 @@ command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 "Clap
 command! Cg Clap grep
 command! Cf Clap files
+command! Cp Clap providers
 
 
+imap <C-F> <C-O>:Cp<CR>
 
 
 " Fake
