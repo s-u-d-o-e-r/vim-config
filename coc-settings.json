@@ -7,7 +7,7 @@
     "javascriptreact",
     "json"
   ],
-
+"emmet.includeLanguages":{"vue-html": "html", "javascript": "javascriptreact","scss": "css", "sass": "css"},
   "prettier.printWidth": 120,
   "prettier.tabWidth": 4,
   "prettier.eslintIntegration": true,

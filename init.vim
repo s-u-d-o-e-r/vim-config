@@ -1,6 +1,6 @@
 call plug#begin("~/.vim/plugged")
     Plug 'tpope/vim-surround'
-    Plug 'jiangmiao/auto-pairs'
+    Plug 'Raimondi/delimitMate'
     Plug 'tpope/vim-repeat'
     Plug 'inkarkat/vim-visualrepeat'
     Plug 'yuttie/comfortable-motion.vim'
@@ -63,6 +63,7 @@ call plug#begin("~/.vim/plugged")
     Plug 'airblade/vim-gitgutter'
     Plug 'jremmen/vim-ripgrep'
     Plug 'airblade/vim-rooter'
+    Plug 'easymotion/vim-easymotion'
     call plug#end()
 
 
@@ -299,7 +300,7 @@ nmap <leader>rn <Plug>(coc-rename)
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
-let g:emmetJsx = 1
+" let g:emmetJsx = 1
 augroup mygroup
   autocmd!
   autocmd BufEnter * EnableBlameLine
@@ -312,16 +313,16 @@ augroup mygroup
 
 
 
-autocmd CursorMoved,CursorMovedI,BufEnter *
-\   if exists('*IsStyledDefinition') |
-\     if IsStyledDefinition(line('.')) && g:emmetJsx |
-\       call coc#config('emmet.includeLanguages', { "javascript": "css" } ) |
-\       let g:emmetJsx = 0 |
-\     elseif !IsStyledDefinition(line('.')) && !g:emmetJsx |
-\       call coc#config('emmet.includeLanguages', { "javascript": "javascriptreact" } ) |
-\       let g:emmetJsx = 1 |
-\     endif |
-\   endif
+" autocmd CursorMoved,CursorMovedI,BufEnter *
+" \   if exists('*IsStyledDefinition') |
+" \     if IsStyledDefinition(line('.')) && g:emmetJsx |
+" \       call coc#config('emmet.includeLanguages', { "javascript": "css" } ) |
+" \       let g:emmetJsx = 0 |
+" \     elseif !IsStyledDefinition(line('.')) && !g:emmetJsx |
+" \       call coc#config('emmet.includeLanguages', { "javascript": "javascriptreact" } ) |
+" \       let g:emmetJsx = 1 |
+" \     endif |
+" \   endif
 
 autocmd CursorMoved,BufEnter *
 \   if &filetype == "coc-explorer" |
@@ -525,3 +526,50 @@ call fake#define('email', 'tolower(substitute(printf("%s@%s.%s",'
 
 " Buffers delete
 nnoremap <silent> <C-q> :Bdelete menu<CR>
+
+"easy motion
+map <Leader> <Plug>(easymotion-prefix)
+function! s:config_easyfuzzymotion(...) abort
+  return extend(copy({
+  \   'converters': [incsearch#config#fuzzyword#converter()],
+  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+  \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+  \   'is_expr': 0,
+  \   'is_stay': 1
+  \ }), get(a:, 1, {}))
+endfunction
+
+noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
+
+
+" Gif config
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+" These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
+" Without these mappings, `n` & `N` works fine. (These mappings just provide
+" different highlight method and have some other features )
+map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+
+" s{char}{char} to move to {char}{char}
+nmap s <Plug>(easymotion-overwin-f2)
+
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
+" Gif config
+map <Leader>l <Plug>(easymotion-lineforward)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map <Leader>h <Plug>(easymotion-linebackward)
+" keep cursor column when JK motion
+
+let g:EasyMotion_startofline = 0 
+let g:EasyMotion_smartcase = 1
