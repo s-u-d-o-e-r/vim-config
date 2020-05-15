@@ -15,6 +15,7 @@ call plug#begin("~/.vim/plugged")
     Plug 'AndrewRadev/splitjoin.vim'
     Plug 'inkarkat/vim-CountJump'
     Plug 'inkarkat/vim-ingo-library'
+    "Plug 'w0rp/ale'
     Plug 'kana/vim-textobj-user'
     Plug 'Julian/vim-textobj-variable-segment'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -30,6 +31,7 @@ call plug#begin("~/.vim/plugged")
     Plug 'inkarkat/vim-ingo-library'
     Plug 'mileszs/ack.vim'
     Plug 'sheerun/vim-polyglot'
+    Plug 'tveskag/nvim-blame-line'
     Plug 'ctrlpvim/ctrlp.vim'
     Plug 'bling/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
@@ -42,7 +44,7 @@ call plug#begin("~/.vim/plugged")
     Plug 'xolox/vim-session'
     Plug 'ryanoasis/vim-devicons'
     Plug 'kkoomen/vim-doge'
-    "Plug 'vim-syntastic/syntastic'
+    Plug 'vim-syntastic/syntastic'
     Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
     Plug 'jparise/vim-graphql'
     Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
@@ -57,7 +59,6 @@ call plug#begin("~/.vim/plugged")
     Plug 'jremmen/vim-ripgrep'
     Plug 'airblade/vim-rooter'
     Plug 'easymotion/vim-easymotion'
-    Plug 'djoshea/vim-autoread'
     call plug#end()
 
 
@@ -88,15 +89,19 @@ nnoremap <F5> :UndotreeToggle<cr>
 "imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 "smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 "xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+
 " Ale settings
-" let g:ale_fixers = {
-"  \ 'javascript': ['eslint']
+"let g:ale_fixers = {
+"\ 'javascript': ['eslint']
 " \ }
 "let g:ale_sign_error = ''
 "let g:ale_sign_warning = '⚠️'
-"let g:ale_fix_on_save = 1
+"let g:ale_fix_on_save = 0
 
 
+
+let g:blameLineVirtualTextPrefix = '|>'
 
 "config JsDoc
 
@@ -110,11 +115,8 @@ nnoremap <F5> :UndotreeToggle<cr>
 
 " config for ctrl+p, ctrl+v, ctrl+x  
 
-
-nmap <C-S> :w<CR> 
-imap <C-S> <C-O>:w<CR>
-nmap <C-A> :noa w<CR>  
-imap <C-A> <C-O>:noa w<CR>
+nmap <C-S> :CocCommand eslint.executeAutofix :w<CR>
+imap <C-S> <C-O>:CocCommand eslint.executeAutofix <C-O>:w<CR>
 
 
 imap <C-p> <Esc>"+pa
@@ -164,19 +166,20 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 " List occurrences for search
 
-colorscheme palenight "night-owl palenight
+colorscheme night-owl "palenight
 
 filetype indent plugin on
 syntax on
 
+set nocompatible              " be iMproved, required
 set number
 set noswapfile
 set smartcase
-set autoread
+
 set hidden
 set wildmenu
 set nohlsearch
-"set autoindent
+set autoindent
 set ruler
 set laststatus=2
 set confirm
@@ -220,13 +223,13 @@ set updatetime=1000
 
 set backupdir=~/.local/share/nvim/backup
 
-"command! -nargs=? -complete=file Todo execute "Ack" 'TODO\|FIXME\|XXX' <f-args>
+command! -nargs=? -complete=file Todo execute "Ack" 'TODO\|FIXME\|XXX' <f-args>
 " Some servers have issues with backup files, see #649
 set nobackup
 set nowritebackup
 
 " Better display for messages
-set cmdheight=1
+set cmdheight=2
 
 " You will have bad experience for diagnostic messages when it's default 4000.
 set updatetime=300
@@ -268,7 +271,7 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-"nmap <F5> :Todo<CR>
+nmap <F5> :Todo<CR>
 
 " Map open terminal in root directory
 nmap <silent> <leader>t :silent exec "!gnome-terminal &"<CR>
@@ -298,6 +301,7 @@ nmap <leader>f  <Plug>(coc-format-selected)
 " let g:emmetJsx = 1
 augroup mygroup
   autocmd!
+  autocmd BufEnter * EnableBlameLine
   " Setup formatexpr specified filetype(s).
   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder
@@ -382,9 +386,7 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 map <leader>fs :CocCommand eslint.executeAutofix<CR>
 
-map <silent> <leader>ff :call CocAction('format')<CR>
-
-
+map <leader>ff :CocCommand prettier.formatFile<CR>
 
 
 map <leader>fa <leader>xs<leader>xf
@@ -392,42 +394,42 @@ map <leader>fa <leader>xs<leader>xf
 
 
 " NERDTress File highlighting
-" function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
-"  exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
-"  exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
-" endfunction
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+ exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+ exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+endfunction
 
-" call NERDTreeHighlightFile('jade', 'green', 'none', 'green', 'none')
-" call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', 'none')
-" call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', 'none')
-" call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', 'none')
-" call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', 'none')
-" call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', 'none')
-" call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', 'none')
-" call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', 'none')
-" call NERDTreeHighlightFile('style', 'cyan', 'none', 'cyan', 'none')
-" call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', 'none')
-" call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', 'none')
-" call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', 'none')
-" call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', 'none')
+call NERDTreeHighlightFile('jade', 'green', 'none', 'green', 'none')
+call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', 'none')
+call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', 'none')
+call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', 'none')
+call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', 'none')
+call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', 'none')
+call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', 'none')
+call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', 'none')
+call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', 'none')
+call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', 'none')
+call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', 'none')
+call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', 'none')
+call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', 'none')
 
-" let g:NERDTreeChDirMode=2
+let g:NERDTreeChDirMode=2
 
-" let g:NERDTreeIndicatorMapCustom = {
-"     \ "Modified"  : "✹",
-"     \ "Staged"    : "✚",
-"     \ "Untracked" : "✭",
-"     \ "Renamed"   : "➜",
-"     \ "Unmerged"  : "═",
-"     \ "Deleted"   : "✖",
-"     \ "Dirty"     : "✗",
-"     \ "Clean"     : "✔︎",
-"     \ 'Ignored'   : '☒',
-"     \ "Unknown"   : "?"
-"     \ }
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ 'Ignored'   : '☒',
+    \ "Unknown"   : "?"
+    \ }
 
-" " view current buffer in nerdtree
-" nmap <leader>r :NERDTreeFind<cr>
+" view current buffer in nerdtree
+nmap <leader>r :NERDTreeFind<cr>
 
  " Ctrl+h/l move cursor to the start/end of the line
 "nmap <c-l> $
@@ -444,18 +446,24 @@ map <leader>fa <leader>xs<leader>xf
 " imap <C-h> <Left>
 
 
+" Ctrl+Enter inserts a newline below the cursor in insert mode (not altering
+" text after uursor)
+imap <c-Enter> <c-o>o
+" Shift+Enter inserts a newline above the cursor in insert mode (not altering
+" text after cursor)
+imap <s-Enter> <c-o><s-o>
 
 
-" hi! Normal guibg=NONE
-" hi! NonText guibg=NONE guifg=white
-" hi! CursorLine guibg=NONE
-" hi! NonText guibg=NONE
-" hi! EndOfBuffer guibg=NONE
-" hi! LineNr guibg=NONE guifg=#dedede
-" hi! CursorLineNr guibg=NONE guifg=#dedede
-" hi! SignColumn guibg=NONE
-" hi! Statusline ctermfg=NONE
 
+"hi! Normal guibg=NONE
+"hi! NonText guibg=NONE guifg=white
+"hi! CursorLine guibg=NONE
+"hi! NonText guibg=NONE
+"hi! EndOfBuffer guibg=NONE
+"hi! LineNr guibg=NONE guifg=#dedede
+"hi! CursorLineNr guibg=NONE guifg=#dedede
+"hi! SignColumn guibg=NONE
+"hi! statusline ctermfg=NONE
 
 function! RipgrepFzf(query, fullscreen)
   let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
@@ -563,4 +571,3 @@ map <Leader>h <Plug>(easymotion-linebackward)
 
 let g:EasyMotion_startofline = 0 
 let g:EasyMotion_smartcase = 1
-
