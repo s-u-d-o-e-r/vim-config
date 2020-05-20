@@ -1,4 +1,4 @@
-call plug#begin("~/.vim/plugged")
+call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-surround'
     Plug 'Raimondi/delimitMate'
     Plug 'tpope/vim-repeat'
@@ -19,7 +19,9 @@ call plug#begin("~/.vim/plugged")
     Plug 'Julian/vim-textobj-variable-segment'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'Shougo/neoinclude.vim'
+    Plug 'jsfaint/coc-neoinclude'
+    Plug 'neoclide/coc.nvim', {'branch': 'release','tag': '*', 'do': { -> coc#util#install()}}
     Plug 'haishanh/night-owl.vim'
     Plug 'liuchengxu/vim-which-key'
     Plug 'AndrewRadev/splitjoin.vim'
@@ -58,10 +60,38 @@ call plug#begin("~/.vim/plugged")
     Plug 'airblade/vim-rooter'
     Plug 'easymotion/vim-easymotion'
     Plug 'djoshea/vim-autoread'
-    call plug#end()
+    "Plug 'rbong/pimodoro'
+    Plug 'theoldmoon0602/coc-plug'
+call plug#end()
 
-
-
+call coc_plug#begin()
+    CocPlug 'coc-yank'
+    CocPlug 'coc-word'
+    CocPlug 'coc-spell-checker'
+    CocPlug 'coc-snippets'
+    CocPlug 'coc-prettier'
+    CocPlug 'coc-neosnippet'
+    CocPlug 'coc-marketplace'
+    CocPlug 'coc-lists'
+    CocPlug 'coc-jest'
+    CocPlug 'coc-java'
+    CocPlug 'coc-highlight'
+    CocPlug 'coc-git'
+    CocPlug 'coc-explorer'
+    CocPlug 'coc-eslint'
+    CocPlug 'coc-emoji'
+    CocPlug 'coc-emmet'
+    CocPlug 'coc-diagnostic'
+    CocPlug 'coc-calc'
+    CocPlug 'coc-actions'
+    CocPlug 'coc-xml'
+    CocPlug 'coc-tsserver'
+    CocPlug 'coc-svg'
+    CocPlug 'coc-markdownlint'
+    CocPlug 'coc-json'
+    CocPlug 'coc-html'
+    CocPlug 'coc-css' 
+call coc_plug#end()
 
 let g:echodoc#enable_at_startup = 1
 let g:echodoc#type = 'popup'
@@ -563,4 +593,6 @@ map <Leader>h <Plug>(easymotion-linebackward)
 
 let g:EasyMotion_startofline = 0 
 let g:EasyMotion_smartcase = 1
+
+"nnoremap <leader>ps :call pim#interrupt()<cr>
 

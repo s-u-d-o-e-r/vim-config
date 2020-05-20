@@ -51,7 +51,7 @@
     },
     "explorer.icon.enableNerdfont": true,
     "explorer.keyMappings": {
-        "i": "unmap",
+        "i": false,
 
         "k": "nodePrev",
         "j": "nodeNext",
@@ -67,7 +67,8 @@
         "K": ["toggleSelection", "nodePrev"],
         "gl": "expandRecursive",
         "gh": "collapseRecursive",
-        "o": "expandOrCollapse",
+        "<2-LeftMouse>": ["expandable?", ["expanded?", "collapse", "expand"], "open"],
+        "o": ["expanded?", "collapse", "expand"],
         "<cr>": ["expandable?", "cd", "open"],
         "e": "open",
         "s": "open:split",
@@ -116,13 +117,13 @@
         ">>": "gitUnstage"
     },
     "cSpell.userWords": [
-      "Chargebacks",
-      "Unmount",
-      "Untracked",
-      "ellipsize",
-      "financials",
-      "helpdesk",
-      "reseted",
-      "uploader"
+        "Chargebacks",
+        "Unmount",
+        "Untracked",
+        "ellipsize",
+        "financials",
+        "helpdesk",
+        "reseted",
+        "uploader"
     ]
 }
