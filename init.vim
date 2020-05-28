@@ -182,8 +182,8 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme='deus'
 
 
-nmap <S-Right> ]b
-nmap <S-Left> [b
+nmap <S-Right> :bnext<CR>
+nmap <S-Left> :bprev<CR>
 
 
 
@@ -429,9 +429,9 @@ command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
 
 "Clap
-map <leader> cg :Clap grep
-map <leader> cf :Clap files
-map <leader> cp :Clap providers
+map <leader><leader>g :Clap grep<Cr>
+map <leader><leader>f :Clap files<CR>
+map <leader><leader>p :Clap providers<CR>
 
 
 imap <C-F> <C-O>:Cp<CR>
@@ -562,3 +562,9 @@ nnoremap <Leader>- :vertical resize -5<CR>
 " Maps for fugitive
 nmap <leader>gj :diffget //3<CR>
 nmap <leader>gf :diffget //2<CR>
+
+" Git conflict markers settings
+highlight ConflictMarkerBegin guibg=#2f7366
+highlight ConflictMarkerOurs guibg=#2e5049
+highlight ConflictMarkerTheirs guibg=#344f69
+highlight ConflictMarkerEnd guibg=#2f628e
