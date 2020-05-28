@@ -1,129 +1,144 @@
 {
-    "coc.preferences.formatOnSaveFiletypes": [
-        "css",
-        "Markdown",
-        "javascript",
-        "html",
-        "javascriptreact",
-        "json",
-        "vim"
-    ],
-    "git.enableGutters": false,
-    "git.addGBlameToVirtualText": true,
-    "diagnostic-languageserver.filetypes": {
-        "vim": "vint",
-        "markdown": "write-good",
-        "sh": "shellcheck",
-        "php": "phpstan"
-    },
-    "diagnostic-languageserver.linters": {
-        "vint": {
-            "command": "vint",
-            "debounce": 100,
-            "args": ["--enable-neovim", "%filepath"],
-            "offsetLine": 0,
-            "offsetColumn": 0,
-            "sourceName": "vint",
-            "formatLines": 1,
-            "formatPattern": [
-                "[^:]+:(\\d+):(\\d+):\\s*(.*)(\\r|\\n)*$",
-                {
-                    "line": 1,
-                    "column": 2,
-                    "message": 3
-                }
-            ]
-        }
-    },
-    "emmet.includeLanguages": { "vue-html": "html", "javascript": "javascriptreact", "scss": "css", "sass": "css" },
-    "prettier.printWidth": 120,
-    "prettier.tabWidth": 4,
-    "prettier.eslintIntegration": true,
-    "prettier.singleQuote": true,
-    "suggest.noselect": false,
-    "suggest.autoTrigger": "always",
-    "suggest.timeout": 500,
-    "suggest.acceptSuggestionOnCommitCharacter": true,
-    "suggest.echodocSupport": true,
-    "eslint.autoFixOnSave": false,
-    "eslint.codeAction.showDocumentation": {
-        "enable": true
-    },
-    "explorer.icon.enableNerdfont": true,
-    "explorer.keyMappings": {
-        "i": false,
+	"coc.preferences.formatOnSaveFiletypes": [
+		"css",
+		"Markdown",
+		"javascript",
+		"html",
+		"javascriptreact",
+		"json",
+		"jsonc",
+		"vim",
+		"scss"
+	],
+	"java.enabled": false,
+	"git.enableGutters": false,
+	"git.addGBlameToVirtualText": true,
+	"diagnostic.refreshOnInsertMode": true,
+	"diagnostic-languageserver.filetypes": {
+		"vim": "vint",
+		"markdown": "write-good",
+		"sh": "shellcheck",
+		"php": "phpstan"
+	},
+	"diagnostic-languageserver.linters": {
+		"vint": {
+			"command": "vint",
+			"debounce": 100,
+			"args": ["--enable-neovim", "%filepath"],
+			"offsetLine": 0,
+			"offsetColumn": 0,
+			"sourceName": "vint",
+			"formatLines": 1,
+			"formatPattern": [
+				"[^:]+:(\\d+):(\\d+):\\s*(.*)(\\r|\\n)*$",
+				{
+					"line": 1,
+					"column": 2,
+					"message": 3
+				}
+			]
+		}
+	},
 
-        "k": "nodePrev",
-        "j": "nodeNext",
-        "gk": "expandablePrev",
-        "gj": "expandableNext",
+	"emmet.includeLanguages": {
+		"vue-html": "html",
+		"javascript": "javascriptreact",
+		"scss": "css",
+		"sass": "css"
+	},
 
-        "*": "toggleSelection",
-        "<tab>": "actionMenu",
+	"prettier.stylelintIntegration": false,
+	"prettier.eslintIntegration": true,
 
-        "h": "collapse",
-        "l": ["expandable?", "expand", "open"],
-        "J": ["toggleSelection", "nodeNext"],
-        "K": ["toggleSelection", "nodePrev"],
-        "gl": "expandRecursive",
-        "gh": "collapseRecursive",
-        "<2-LeftMouse>": ["expandable?", ["expanded?", "collapse", "expand"], "open"],
-        "o": ["expanded?", "collapse", "expand"],
-        "<cr>": ["expandable?", "cd", "open"],
-        "e": "open",
-        "s": "open:split",
-        "S": "open:split:plain",
-        "E": "open:vsplit",
-        "t": "open:tab",
-        "<bs>": "gotoParent",
-        "gp": "preview:labeling",
+	"suggest.noselect": false,
+	"suggest.autoTrigger": "always",
+	"suggest.timeout": 500,
+	"suggest.acceptSuggestionOnCommitCharacter": true,
+	"suggest.echodocSupport": true,
+	"eslint.autoFixOnSave": false,
+	"eslint.codeAction.showDocumentation": {
+		"enable": true
+	},
+	"explorer.icon.enableNerdfont": true,
+	"explorer.keyMappings": {
+		"i": false,
 
-        "y": "copyFilepath",
-        "Y": "copyFilename",
-        "c": "copyFile",
-        "x": "cutFile",
-        "p": "pasteFile",
-        "d": "delete",
-        "D": "deleteForever",
+		"k": "nodePrev",
+		"j": "nodeNext",
+		"gk": "expandablePrev",
+		"gj": "expandableNext",
 
-        "a": "addFile",
-        "A": "addDirectory",
-        "r": "rename",
+		"*": "toggleSelection",
+		"<tab>": "actionMenu",
 
-        ".": "toggleHidden",
-        "R": "refresh",
+		"h": "collapse",
+		"l": ["expandable?", "expand", "open"],
+		"J": ["toggleSelection", "nodeNext"],
+		"K": ["toggleSelection", "nodePrev"],
+		"gl": "expandRecursive",
+		"gh": "collapseRecursive",
+		"<2-LeftMouse>": ["expandable?", ["expanded?", "collapse", "expand"], "open"],
+		"o": ["expanded?", "collapse", "expand"],
+		"<cr>": ["expandable?", "cd", "open"],
+		"e": "open",
+		"s": "open:split",
+		"S": "open:split:plain",
+		"E": "open:vsplit",
+		"t": "open:tab",
+		"<bs>": "gotoParent",
+		"gp": "preview:labeling",
 
-        "?": "help",
-        "q": "quit",
-        "<esc>": "esc",
-        "X": "systemExecute",
-        "gd": "listDrive",
+		"y": "copyFilepath",
+		"Y": "copyFilename",
+		"c": "copyFile",
+		"x": "cutFile",
+		"p": "pasteFile",
+		"d": "delete",
+		"D": "deleteForever",
 
-        "f": "search",
-        "F": "searchRecursive",
+		"a": "addFile",
+		"A": "addDirectory",
+		"r": "rename",
 
-        "gf": "gotoSource:file",
-        "gb": "gotoSource:buffer",
+		".": "toggleHidden",
+		"R": "refresh",
 
-        "[[": "sourcePrev",
-        "]]": "sourceNext",
+		"?": "help",
+		"q": "quit",
+		"<esc>": "esc",
+		"X": "systemExecute",
+		"gd": "listDrive",
 
-        "[d": "diagnosticPrev",
-        "]d": "diagnosticNext",
+		"f": "search",
+		"F": "searchRecursive",
 
-        "[c": "gitPrev",
-        "]c": "gitNext",
-        "<<": "gitStage",
-        ">>": "gitUnstage"
-    },
-    "cSpell.userWords": [
-        "Chargebacks",
-        "Unmount",
-        "Untracked",
-        "ellipsize",
-        "financials",
-        "helpdesk",
-        "reseted",
-        "uploader"
-    ]
+		"gf": "gotoSource:file",
+		"gb": "gotoSource:buffer",
+
+		"[[": "sourcePrev",
+		"]]": "sourceNext",
+
+		"[d": "diagnosticPrev",
+		"]d": "diagnosticNext",
+
+		"[c": "gitPrev",
+		"]c": "gitNext",
+		"<<": "gitStage",
+		">>": "gitUnstage"
+	},
+	"cSpell.userWords": [
+		"Chargebacks",
+		"Unmount",
+		"Untracked",
+		"ellipsize",
+		"financials",
+		"helpdesk",
+		"reseted",
+		"uploader"
+	],
+	"prettier.trailingComma": "none",
+	"prettier.singleQuote": true,
+	"prettier.printWidth": 100,
+	"prettier.useTabs": true,
+	"prettier.tabWidth": 2
 }

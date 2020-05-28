@@ -62,6 +62,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'djoshea/vim-autoread'
     "Plug 'rbong/pimodoro'
     Plug 'theoldmoon0602/coc-plug'
+    Plug 'psliwka/vim-smoothie'
+    Plug 'joshdick/onedark.vim'
 call plug#end()
 
 call coc_plug#begin()
@@ -93,8 +95,9 @@ call coc_plug#begin()
     CocPlug 'coc-css' 
 call coc_plug#end()
 
+let mapleader = " "
 let g:echodoc#enable_at_startup = 1
-let g:echodoc#type = 'popup'
+let g:echodoc#type = 'float'
 
 " gist
 let g:gist_detect_filetype = 1
@@ -160,8 +163,7 @@ noremap p "*p
 noremap Y "+y
 noremap P "+p
 
-"for formatting
-autocmd CursorHold * silent syntax sync fromstart
+
 
 let g:blamer_delay = 500
 "session config
@@ -194,7 +196,7 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 " List occurrences for search
 
-colorscheme palenight "night-owl palenight
+colorscheme onedark "night-owl palenight nord onedark
 
 filetype indent plugin on
 syntax on
@@ -226,17 +228,16 @@ set noshowmode
 set nowrap
 set nolbr
 set bg=dark
-scriptencoding utf-8
 set encoding=utf-8
+scriptencoding utf-8
 set guioptions-=m
 set guioptions-=M
 set guioptions-=T
 set guioptions-=r
 set guioptions-=L
-au GUIEnter * simalt ~x
-au BufNewFile,BufRead *.ejs set filetype=html
-let g:python3_host_prog="/usr/local/bin/python3"
-set nocompatible
+
+let g:python3_host_prog='/usr/local/bin/python3'
+"set nocompatible
 set smartcase
 set noshowmode
 set noruler
@@ -281,7 +282,7 @@ inoremap <silent><expr> <Tab>
       \ coc#refresh()
 
 " use <c-space>for trigger completion
-inoremap <silent><expr> <c-space> coc#refresh()
+"inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
@@ -315,8 +316,7 @@ function! s:show_documentation()
   endif
 endfunction
 
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
+
 
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
@@ -325,8 +325,17 @@ nmap <leader>rn <Plug>(coc-rename)
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
-" let g:emmetJsx = 1
+ let g:emmetJsx = 1
 augroup mygroup
+
+  au GUIEnter * simalt ~x
+  au BufNewFile,BufRead *.ejs set filetype=html
+
+  autocmd CursorHold * silent syntax sync fromstart
+
+  " Highlight symbol under cursor on CursorHold
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+
   autocmd!
   " Setup formatexpr specified filetype(s).
   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
@@ -337,23 +346,21 @@ augroup mygroup
 
 
 
-" autocmd CursorMoved,CursorMovedI,BufEnter *
-" \   if exists('*IsStyledDefinition') |
-" \     if IsStyledDefinition(line('.')) && g:emmetJsx |
-" \       call coc#config('emmet.includeLanguages', { "javascript": "css" } ) |
-" \       let g:emmetJsx = 0 |
-" \     elseif !IsStyledDefinition(line('.')) && !g:emmetJsx |
-" \       call coc#config('emmet.includeLanguages', { "javascript": "javascriptreact" } ) |
-" \       let g:emmetJsx = 1 |
-" \     endif |
-" \   endif
+autocmd CursorMoved,CursorMovedI,BufEnter *
+\   if exists('*IsStyledDefinition') |
+\     if IsStyledDefinition(line('.')) && g:emmetJsx |
+\       call coc#config('emmet.includeLanguages', { "javascript": "css" } ) |
+\       let g:emmetJsx = 0 |
+\     elseif !IsStyledDefinition(line('.')) && !g:emmetJsx |
+\       call coc#config('emmet.includeLanguages', { "javascript": "javascriptreact" } ) |
+\       let g:emmetJsx = 1 |
+\     endif |
+\   endif
 
 autocmd CursorMoved,BufEnter *
 \   if &filetype == "coc-explorer" |
 \     execute "norm 0" |
 \   endif
-
-
 
 augroup end
 
@@ -595,4 +602,30 @@ let g:EasyMotion_startofline = 0
 let g:EasyMotion_smartcase = 1
 
 "nnoremap <leader>ps :call pim#interrupt()<cr>
+
+" returns all modified files of the current git repo
+" `2>/dev/null` makes the command fail quietly, so that when we are not
+" in a git repo, the list will be empty
+function! s:gitModified()
+    let files = systemlist('git ls-files -m 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+endfunction
+
+" same as above, but show untracked files, honouring .gitignore
+function! s:gitUntracked()
+    let files = systemlist('git ls-files -o --exclude-standard 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+endfunction
+
+let g:startify_lists = [
+        \ { 'type': 'files',     'header': ['   MRU']            },
+        \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+        \ { 'type': 'sessions',  'header': ['   Sessions']       },
+        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+        \ { 'type': function('s:gitModified'),  'header': ['   git modified']},
+        \ { 'type': function('s:gitUntracked'), 'header': ['   git untracked']},
+        \ { 'type': 'commands',  'header': ['   Commands']       },
+        \ ]
+
+
 
