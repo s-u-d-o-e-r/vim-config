@@ -1,69 +1,94 @@
 call plug#begin('~/.vim/plugged')
-    Plug 'tpope/vim-surround'
+    " Auto-completion for quotes, parens, brackets
     Plug 'Raimondi/delimitMate'
+    " Enable repeating supported plugin maps with "."
     Plug 'tpope/vim-repeat'
+    " Repeat command extended to visual mode.
     Plug 'inkarkat/vim-visualrepeat'
+    " Brings physics-based smooth scrolling
     Plug 'yuttie/comfortable-motion.vim'
+    " Color scheme
     Plug 'arcticicestudio/nord-vim'
+    " A dark colorscheme with vibrant colors
     Plug 'flrnprz/candid.vim'
-    Plug 'mileszs/ack.vim'
+    "Plug 'mileszs/ack.vim'
+    "A Git wrapper
     Plug 'tpope/vim-fugitive'
+    " Fake data generator
     Plug 'tkhren/vim-fake'
+    " Buffers close menu
     Plug 'Asheq/close-buffers.vim'
     " React code snippets
     Plug 'epilande/vim-react-snippets'
+    " Switch between single-line and multiline forms of code
     Plug 'AndrewRadev/splitjoin.vim'
-    Plug 'inkarkat/vim-CountJump'
-    Plug 'inkarkat/vim-ingo-library'
-    Plug 'kana/vim-textobj-user'
-    Plug 'Julian/vim-textobj-variable-segment'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
+    " Include source for coc.nvim
     Plug 'Shougo/neoinclude.vim'
+    " Include source for coc.nvim
     Plug 'jsfaint/coc-neoinclude'
     Plug 'neoclide/coc.nvim', {'branch': 'release','tag': '*', 'do': { -> coc#util#install()}}
+    " Color scheme
     Plug 'haishanh/night-owl.vim'
-    Plug 'liuchengxu/vim-which-key'
-    Plug 'AndrewRadev/splitjoin.vim'
+    " Screenshot maker
     Plug 'kristijanhusak/vim-carbon-now-sh'
+    " A lightweight and powerful git branch viewer for vim.
     Plug 'rbong/vim-flog'
-    Plug 'haya14busa/incsearch.vim'
-    Plug 'inkarkat/vim-visualrepeat'
-    Plug 'inkarkat/vim-ingo-library'
-    Plug 'mileszs/ack.vim'
+    " A solid language pack for Vim.
     Plug 'sheerun/vim-polyglot'
+    " Fuzzy file, buffer, mru, tag, etc finder
     Plug 'ctrlpvim/ctrlp.vim'
+    " Lean & mean status/tabline for vim that's light as air
     Plug 'bling/vim-airline'
+    " Themes for airline
     Plug 'vim-airline/vim-airline-themes'
+    " Snippets support
     Plug 'Shougo/neosnippet.vim'
+    " Default snippets
     Plug 'Shougo/neosnippet-snippets'
+    " Print documents in echo area.
     Plug 'Shougo/echodoc.vim'
-    Plug 'Xuyuanp/nerdtree-git-plugin'
-    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-    Plug 'xolox/vim-misc'
+    " Extended session management for Vim
     Plug 'xolox/vim-session'
+    " Required for vim-session
+    Plug 'xolox/vim-misc'
+    " File extensions icons
     Plug 'ryanoasis/vim-devicons'
+    " (Do)cumentation (Ge)nerator 15+ languages  Generate proper code documentation skeletons with a single keypress.
     Plug 'kkoomen/vim-doge'
-    "Plug 'vim-syntastic/syntastic'
+    " Vim bundle for styled-components based javascript files.
     Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+    " A Vim plugin that provides GraphQL file detection, syntax highlighting, and indentation.
     Plug 'jparise/vim-graphql'
+    " Modern performant generic finder and dispatcher for Vim and NeoVim
     Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
+    " Color scheme
     Plug 'drewtempelmeyer/palenight.vim'
-    Plug 'tpope/vim-unimpaired'
+    " The undo history visualizer for VIM
     Plug 'mbbill/undotree'
+    " Commentary.vim: comment stuff out 
     Plug 'tpope/vim-commentary'
+    " The fancy start screen for Vim.
     Plug 'mhinz/vim-startify'
+    " The open source plugin for productivity metrics, goals, leaderboards, and automatic time tracking.
     Plug 'wakatime/vim-wakatime'
-    Plug 'mattn/vim-gist'
+    " A Vim plugin which shows git diff markers in the sign column
     Plug 'airblade/vim-gitgutter'
+    " Use RipGrep in Vim and display results in a quickfix list
     Plug 'jremmen/vim-ripgrep'
+    " Changes Vim working directory to project root (identified by presence of known directory or file).
     Plug 'airblade/vim-rooter'
+    " Vim motions on speed!
     Plug 'easymotion/vim-easymotion'
+    " Have Vim automatically reload a file that has changed externally
     Plug 'djoshea/vim-autoread'
-    "Plug 'rbong/pimodoro'
+    " Plugin manager for coc
     Plug 'theoldmoon0602/coc-plug'
-    Plug 'psliwka/vim-smoothie'
+    " Color scheme
     Plug 'joshdick/onedark.vim'
+    " Motions to and inside git conflict markers
+    Plug 'rhysd/conflict-marker.vim'
 call plug#end()
 
 call coc_plug#begin()
@@ -95,7 +120,7 @@ call coc_plug#begin()
     CocPlug 'coc-css' 
 call coc_plug#end()
 
-let mapleader = " "
+let mapleader = ' '
 let g:echodoc#enable_at_startup = 1
 let g:echodoc#type = 'float'
 
@@ -107,7 +132,7 @@ let g:gist_post_private = 1
 
 "start page
 
-let g:startify_session_dir = "~/.vim/sessions"
+let g:startify_session_dir = '~/.vim/sessions'
 
 " screenshots
 let g:carbon_now_sh_options =
@@ -118,30 +143,6 @@ let g:carbon_now_sh_options =
 vnoremap <F3> :CarbonNowSh<CR>
 nnoremap <F5> :UndotreeToggle<cr>
 
-"imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"xmap <C-k>     <Plug>(neosnippet_expand_target)
-" Ale settings
-" let g:ale_fixers = {
-"  \ 'javascript': ['eslint']
-" \ }
-"let g:ale_sign_error = ''
-"let g:ale_sign_warning = '⚠️'
-"let g:ale_fix_on_save = 1
-
-
-
-"config JsDoc
-
-
-
-"nmap <silent> <C-l> <Plug>(jsdoc)
-"let g:jsdoc_allow_input_prompt = 1 
-"let g:jsdoc_input_description = 1
-"let g:jsdoc_enable_es6 = 1
-"let g:jsdoc_param_description_separator = ' => '
-
-" config for ctrl+p, ctrl+v, ctrl+x  
 
 
 nmap <C-S> :w<CR> 
@@ -187,7 +188,7 @@ nmap <S-Left> [b
 
 
 " If you have vim >=8.0 or Neovim >= 0.1.5
-if (has("termguicolors"))
+if (has('termguicolors'))
  set termguicolors
 endif
 
@@ -196,7 +197,7 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 " List occurrences for search
 
-colorscheme onedark "night-owl palenight nord onedark
+colorscheme candid "night-owl palenight nord onedark candid
 
 filetype indent plugin on
 syntax on
@@ -247,11 +248,10 @@ set undofile
 set undodir=$HOME/.vim/undo
 set undolevels=1000
 set undoreload=10000
-set updatetime=1000
 
 set backupdir=~/.local/share/nvim/backup
 
-"command! -nargs=? -complete=file Todo execute "Ack" 'TODO\|FIXME\|XXX' <f-args>
+"command! -nargs=? -complete=file Todo execute 'Ack' 'TODO\|FIXME\|XXX' <f-args>
 " Some servers have issues with backup files, see #649
 set nobackup
 set nowritebackup
@@ -260,7 +260,7 @@ set nowritebackup
 set cmdheight=1
 
 " You will have bad experience for diagnostic messages when it's default 4000.
-set updatetime=300
+set updatetime=50
 
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
@@ -281,14 +281,11 @@ inoremap <silent><expr> <Tab>
       \ <SID>check_back_space() ? "\<Tab>" :
       \ coc#refresh()
 
-" use <c-space>for trigger completion
-"inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-"nmap <C-n> :NERDTreeToggle<CR>
 nmap <C-n> :CocCommand explorer<CR>
 " Use `[c` and `]c` to navigate diagnostics
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
@@ -299,7 +296,6 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-"nmap <F5> :Todo<CR>
 
 " Map open terminal in root directory
 nmap <silent> <leader>t :silent exec "!gnome-terminal &"<CR>
@@ -364,9 +360,6 @@ autocmd CursorMoved,BufEnter *
 
 augroup end
 
-" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-"xmap <leader>a  <Plug>(coc-codeaction-selected)
-"nmap <leader>a  <Plug>(coc-codeaction-selected)
 " Remap for do codeAction of selected region
 function! s:cocActionsOpenFromSelected(type) abort
   execute 'CocCommand actions.open ' . a:type
@@ -381,10 +374,7 @@ nmap <silent> <leader>ac  :<C-u> CocCommand actions.open<cr>
 " Fix autofix problem of current line
 nmap <leader>qf  <Plug>(coc-fix-current)
 
-" Use <tab> for select selections ranges, needs server support, like: coc-tsserver, coc-python
-"nmap <silent> <TAB> <Plug>(coc-range-select)
-"xmap <silent> <TAB> <Plug>(coc-range-select)
-"xmap <silent> <S-TAB> <Plug>(coc-range-select-backword)
+
 
 " Use `:Format` to format current buffer
 command! -nargs=0 Format :call CocAction('format')
@@ -427,73 +417,6 @@ map <silent> <leader>ff :call CocAction('format')<CR>
 map <leader>fa <leader>xs<leader>xf
 
 
-
-" NERDTress File highlighting
-" function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
-"  exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
-"  exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
-" endfunction
-
-" call NERDTreeHighlightFile('jade', 'green', 'none', 'green', 'none')
-" call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', 'none')
-" call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', 'none')
-" call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', 'none')
-" call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', 'none')
-" call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', 'none')
-" call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', 'none')
-" call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', 'none')
-" call NERDTreeHighlightFile('style', 'cyan', 'none', 'cyan', 'none')
-" call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', 'none')
-" call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', 'none')
-" call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', 'none')
-" call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', 'none')
-
-" let g:NERDTreeChDirMode=2
-
-" let g:NERDTreeIndicatorMapCustom = {
-"     \ "Modified"  : "✹",
-"     \ "Staged"    : "✚",
-"     \ "Untracked" : "✭",
-"     \ "Renamed"   : "➜",
-"     \ "Unmerged"  : "═",
-"     \ "Deleted"   : "✖",
-"     \ "Dirty"     : "✗",
-"     \ "Clean"     : "✔︎",
-"     \ 'Ignored'   : '☒',
-"     \ "Unknown"   : "?"
-"     \ }
-
-" " view current buffer in nerdtree
-" nmap <leader>r :NERDTreeFind<cr>
-
- " Ctrl+h/l move cursor to the start/end of the line
-"nmap <c-l> $
-"omap <c-l> $
-"vmap <c-h> ^
-"vmap <c-l> $
-"nmap <c-h> ^
-
-
-" Ctrl+h/j/k/l act as arrow keys in insert mode
-" imap <C-k> <Up>
-" imap <C-l> <Right>
-" imap <C-j> <Down>
-" imap <C-h> <Left>
-
-
-
-
-" hi! Normal guibg=NONE
-" hi! NonText guibg=NONE guifg=white
-" hi! CursorLine guibg=NONE
-" hi! NonText guibg=NONE
-" hi! EndOfBuffer guibg=NONE
-" hi! LineNr guibg=NONE guifg=#dedede
-" hi! CursorLineNr guibg=NONE guifg=#dedede
-" hi! SignColumn guibg=NONE
-" hi! Statusline ctermfg=NONE
-
-
 function! RipgrepFzf(query, fullscreen)
   let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
   let initial_command = printf(command_fmt, shellescape(a:query))
@@ -506,9 +429,9 @@ command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
 
 "Clap
-command! Cg Clap grep
-command! Cf Clap files
-command! Cp Clap providers
+map <leader> cg :Clap grep
+map <leader> cf :Clap files
+map <leader> cp :Clap providers
 
 
 imap <C-F> <C-O>:Cp<CR>
@@ -627,5 +550,15 @@ let g:startify_lists = [
         \ { 'type': 'commands',  'header': ['   Commands']       },
         \ ]
 
+" Remapping for windows movements
+nnoremap <leader>h :wincmd h<CR>
+nnoremap <leader>j :wincmd j<CR>
+nnoremap <leader>k :wincmd k<CR>
+nnoremap <leader>l :wincmd l<CR>
+nnoremap <leader>u :UndotreeShow<CR>
+nnoremap <Leader>+ :vertical resize +5<CR>
+nnoremap <Leader>- :vertical resize -5<CR>
 
-
+" Maps for fugitive
+nmap <leader>gj :diffget //3<CR>
+nmap <leader>gf :diffget //2<CR>
