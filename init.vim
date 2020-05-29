@@ -89,6 +89,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'joshdick/onedark.vim'
     " Motions to and inside git conflict markers
     Plug 'rhysd/conflict-marker.vim'
+    " Vim plugin to automate replacing expressions with assigned variables in any programming language
+    Plug 'da-x/name-assign.vim'
 call plug#end()
 
 call coc_plug#begin()
@@ -324,6 +326,8 @@ nmap <leader>f  <Plug>(coc-format-selected)
  let g:emmetJsx = 1
 augroup mygroup
 
+  "au BufWritePost * nested checktime %
+
   au GUIEnter * simalt ~x
   au BufNewFile,BufRead *.ejs set filetype=html
 
@@ -432,7 +436,7 @@ command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 map <leader><leader>g :Clap grep<Cr>
 map <leader><leader>f :Clap files<CR>
 map <leader><leader>p :Clap providers<CR>
-
+let g:clap_insert_mode_only = 'true'
 
 imap <C-F> <C-O>:Cp<CR>
 

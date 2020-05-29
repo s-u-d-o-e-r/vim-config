@@ -127,15 +127,16 @@
 		">>": "gitUnstage"
 	},
 	"cSpell.userWords": [
-		"Chargebacks",
-		"Unmount",
-		"Untracked",
-		"ellipsize",
-		"financials",
-		"helpdesk",
-		"reseted",
-		"uploader"
-	],
+    "Chargebacks",
+    "Unmount",
+    "Untracked",
+    "debounced",
+    "ellipsize",
+    "financials",
+    "helpdesk",
+    "reseted",
+    "uploader"
+  ],
 	"prettier.trailingComma": "none",
 	"prettier.singleQuote": true,
 	"prettier.printWidth": 100,
