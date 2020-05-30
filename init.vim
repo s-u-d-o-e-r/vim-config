@@ -1,7 +1,7 @@
 call plug#begin('~/.vim/plugged')
     " Auto-completion for quotes, parens, brackets
     Plug 'Raimondi/delimitMate'
-    " Enable repeating supported plugin maps with "."
+    " Enable repeating supported plugin maps with '.'
     Plug 'tpope/vim-repeat'
     " Repeat command extended to visual mode.
     Plug 'inkarkat/vim-visualrepeat'
@@ -20,9 +20,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'Asheq/close-buffers.vim'
     " React code snippets
     Plug 'epilande/vim-react-snippets'
-    " Switch between single-line and multiline forms of code
+    " Switch between single-line and multiline forms of code gS - spit / gJ - join
     Plug 'AndrewRadev/splitjoin.vim'
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf' , { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     " Include source for coc.nvim
     Plug 'Shougo/neoinclude.vim'
@@ -123,14 +123,12 @@ call coc_plug#begin()
 call coc_plug#end()
 
 let mapleader = ' '
+
+
+" echodoc configs
 let g:echodoc#enable_at_startup = 1
 let g:echodoc#type = 'float'
 
-" gist
-let g:gist_detect_filetype = 1
-
-let g:gist_open_browser_after_post = 1
-let g:gist_post_private = 1
 
 "start page
 
@@ -145,21 +143,16 @@ let g:carbon_now_sh_options =
 vnoremap <F3> :CarbonNowSh<CR>
 nnoremap <F5> :UndotreeToggle<cr>
 
-
-
+" save mappings
 nmap <C-S> :w<CR> 
 imap <C-S> <C-O>:w<CR>
 nmap <C-A> :noa w<CR>  
 imap <C-A> <C-O>:noa w<CR>
 
 
+" copy / paste mappings
 imap <C-p> <Esc>"+pa
-"nmap <C-v> "+p
-"vmap <C-v> xh"+pi
-
-vnoremap <C-c> "+y
-
-vnoremap <C-x> "+d
+vnoremap <leader>d "+d
 
 noremap y "*y
 noremap p "*p
@@ -182,10 +175,12 @@ let g:session_verbose_messages = 0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme='deus'
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
 
-nmap <S-Right> :bnext<CR>
-nmap <S-Left> :bprev<CR>
+" mapping for buffers control
+nmap <S-H> :bnext<CR>
+nmap <S-L> :bprev<CR>
 
 
 
@@ -211,7 +206,7 @@ set autoread
 set hidden
 set wildmenu
 set nohlsearch
-"set autoindent
+set autoindent
 set ruler
 set laststatus=2
 set confirm
@@ -238,9 +233,7 @@ set guioptions-=M
 set guioptions-=T
 set guioptions-=r
 set guioptions-=L
-
 let g:python3_host_prog='/usr/local/bin/python3'
-"set nocompatible
 set smartcase
 set noshowmode
 set noruler
@@ -248,27 +241,16 @@ set laststatus=0
 set noshowcmd
 set undofile
 set undodir=$HOME/.vim/undo
-set undolevels=1000
+set undolevels=3000
 set undoreload=10000
-
 set backupdir=~/.local/share/nvim/backup
-
-"command! -nargs=? -complete=file Todo execute 'Ack' 'TODO\|FIXME\|XXX' <f-args>
-" Some servers have issues with backup files, see #649
 set nobackup
 set nowritebackup
-
-" Better display for messages
 set cmdheight=1
-
-" You will have bad experience for diagnostic messages when it's default 4000.
 set updatetime=50
-
-" don't give |ins-completion-menu| messages.
 set shortmess+=c
-
-" always show signcolumns
 set signcolumn=yes
+
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
@@ -572,3 +554,18 @@ highlight ConflictMarkerBegin guibg=#2f7366
 highlight ConflictMarkerOurs guibg=#2e5049
 highlight ConflictMarkerTheirs guibg=#344f69
 highlight ConflictMarkerEnd guibg=#2f628e
+
+
+" Coc-git keymaps
+" navigate chunks of current buffer
+nmap [g <Plug>(coc-git-prevchunk)
+nmap ]g <Plug>(coc-git-nextchunk)
+" show chunk diff at current position
+nmap gs <Plug>(coc-git-chunkinfo)
+" show commit contains current position
+nmap gc <Plug>(coc-git-commit)
+" create text object for git chunks
+omap ig <Plug>(coc-git-chunk-inner)
+xmap ig <Plug>(coc-git-chunk-inner)
+omap ag <Plug>(coc-git-chunk-outer)
+xmap ag <Plug>(coc-git-chunk-outer)
