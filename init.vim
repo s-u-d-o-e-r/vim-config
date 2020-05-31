@@ -94,6 +94,8 @@ call plug#begin('~/.vim/plugged')
     " VimL competition
     Plug 'Shougo/neco-vim'
     Plug 'neoclide/coc-neco'
+    " Plugin that adds a 'cut' operation separate from 'delete'
+    Plug 'svermeulen/vim-cutlass'
 call plug#end()
 
 call coc_plug#begin()
@@ -154,14 +156,20 @@ nmap <C-A> :noa w<CR>
 imap <C-A> <C-O>:noa w<CR>
 
 
-" copy / paste mappings
-imap <C-p> <Esc>"+pa
-vnoremap <leader>d "+d
+" Delete /Cut mapping
+nnoremap <leader>d d
+xnoremap <leader>d d
 
-noremap y "*y
-noremap p "*p
-noremap Y "+y
-noremap P "+p
+nnoremap <leader>dd dd
+nnoremap <leader>D D
+
+" copy / paste mapping
+imap <C-p> <C-o>"+p
+
+" noremap y "*y
+" noremap p "*p
+" noremap Y "+y
+" noremap P "+p
 
 
 
@@ -203,6 +211,7 @@ colorscheme candid "night-owl palenight nord onedark candid
 filetype indent plugin on
 syntax on
 
+set clipboard=unnamedplus
 set number
 set noswapfile
 set smartcase
@@ -567,7 +576,7 @@ nmap ]g <Plug>(coc-git-nextchunk)
 " show chunk diff at current position
 nmap gs <Plug>(coc-git-chunkinfo)
 " show commit contains current position
-nmap gc <Plug>(coc-git-commit)
+nmap <leader>gc <Plug>(coc-git-commit)
 " create text object for git chunks
 omap ig <Plug>(coc-git-chunk-inner)
 xmap ig <Plug>(coc-git-chunk-inner)
