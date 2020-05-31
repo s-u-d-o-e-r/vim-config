@@ -96,6 +96,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'neoclide/coc-neco'
     " Plugin that adds a 'cut' operation separate from 'delete'
     Plug 'svermeulen/vim-cutlass'
+    " Vim plugin that provides additional text objects
+    Plug 'wellle/targets.vim'
 call plug#end()
 
 call coc_plug#begin()
