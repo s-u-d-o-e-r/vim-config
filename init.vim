@@ -91,6 +91,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'rhysd/conflict-marker.vim'
     " Vim plugin to automate replacing expressions with assigned variables in any programming language
     Plug 'da-x/name-assign.vim'
+    " VimL competition
+    Plug 'Shougo/neco-vim'
+    Plug 'neoclide/coc-neco'
 call plug#end()
 
 call coc_plug#begin()
@@ -127,12 +130,13 @@ let mapleader = ' '
 
 " echodoc configs
 let g:echodoc#enable_at_startup = 1
-let g:echodoc#type = 'float'
-
+let g:echodoc#type = 'popup'
 
 "start page
 
 let g:startify_session_dir = '~/.vim/sessions'
+
+map <leader><leader>s :Startify<CR>
 
 " screenshots
 let g:carbon_now_sh_options =
@@ -569,3 +573,5 @@ omap ig <Plug>(coc-git-chunk-inner)
 xmap ig <Plug>(coc-git-chunk-inner)
 omap ag <Plug>(coc-git-chunk-outer)
 xmap ag <Plug>(coc-git-chunk-outer)
+
+
