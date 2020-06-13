@@ -132,6 +132,9 @@ call coc_plug#end()
 let mapleader = ' '
 
 
+"DoGE settings
+let g:doge_mapping = '<leader><leader>d'
+
 " echodoc configs
 let g:echodoc#enable_at_startup = 1
 let g:echodoc#type = 'popup'
@@ -165,17 +168,13 @@ xnoremap <leader>d d
 nnoremap <leader>dd dd
 nnoremap <leader>D D
 
-" copy / paste mapping
+" mapping / mapping mapping
 imap <C-p> <C-o>"+p
-
-" noremap y "*y
-" noremap p "*p
-" noremap Y "+y
-" noremap P "+p
+vmap <s-p> "0p
 
 
 
-let g:blamer_delay = 500
+
 "session config
 let g:session_autoload = 'no'
 let g:session_autosave = 'yes'
@@ -193,8 +192,8 @@ let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
 
 " mapping for buffers control
-nmap <S-H> :bnext<CR>
-nmap <S-L> :bprev<CR>
+nmap <S-H> :bprev<CR>
+nmap <S-L> :bnext<CR>
 
 
 
@@ -264,7 +263,15 @@ set nowritebackup
 set cmdheight=1
 set updatetime=50
 set shortmess+=c
-set signcolumn=yes
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has('patch-8.1.1564')
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
 
 
 " Use tab for trigger completion with characters ahead and navigate.

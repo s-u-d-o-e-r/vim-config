@@ -1,5 +1,5 @@
 {
-	"coc.preferences.formatOnSaveFiletypes": [
+	"coc.preferences.formatOnSaveFiletypes-----": [
 		"css",
 		"Markdown",
 		"javascript",
@@ -40,22 +40,15 @@
 		}
 	},
 
-	"emmet.includeLanguages": {
-		"vue-html": "html",
-		"javascript": "javascriptreact",
-		"scss": "css",
-		"sass": "css"
-	},
 
-	"prettier.stylelintIntegration": false,
+	"prettier.stylelintIntegration": true,
 	"prettier.eslintIntegration": true,
-
 	"suggest.noselect": false,
 	"suggest.autoTrigger": "always",
 	"suggest.timeout": 500,
 	"suggest.acceptSuggestionOnCommitCharacter": true,
 	"suggest.echodocSupport": true,
-	"eslint.autoFixOnSave": false,
+	"eslint.autoFixOnSave": true,
 	"eslint.codeAction.showDocumentation": {
 		"enable": true
 	},
