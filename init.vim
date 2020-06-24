@@ -1,6 +1,6 @@
 call plug#begin('~/.vim/plugged')
     " Auto-completion for quotes, parens, brackets
-    Plug 'Raimondi/delimitMate'
+"    Plug 'Raimondi/delimitMate'
     " Enable repeating supported plugin maps with '.'
     Plug 'tpope/vim-repeat'
     " Repeat command extended to visual mode.
@@ -100,7 +100,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'wellle/targets.vim'
 call plug#end()
 
-call coc_plug#begin()
+ call coc_plug#begin()
     CocPlug 'coc-yank'
     CocPlug 'coc-word'
     CocPlug 'coc-spell-checker'
@@ -129,79 +129,6 @@ call coc_plug#begin()
     CocPlug 'coc-css' 
 call coc_plug#end()
 
-let mapleader = ' '
-
-
-"DoGE settings
-let g:doge_mapping = '<leader><leader>d'
-
-" echodoc configs
-let g:echodoc#enable_at_startup = 1
-let g:echodoc#type = 'popup'
-
-"start page
-
-let g:startify_session_dir = '~/.vim/sessions'
-
-map <leader><leader>s :Startify<CR>
-
-" screenshots
-let g:carbon_now_sh_options =
-\ { 'ln': 'false',
-\ 'fm': 'Fira Code',
-\ 't':'night-owl'}
-
-vnoremap <F3> :CarbonNowSh<CR>
-nnoremap <F5> :UndotreeToggle<cr>
-
-" save mappings
-nmap <C-S> :w<CR> 
-imap <C-S> <C-O>:w<CR>
-nmap <C-A> :noa w<CR>  
-imap <C-A> <C-O>:noa w<CR>
-
-
-" Delete /Cut mapping
-nnoremap <leader>d d
-xnoremap <leader>d d
-
-nnoremap <leader>dd dd
-nnoremap <leader>D D
-
-" mapping / mapping mapping
-imap <C-p> <C-o>"+p
-vmap <s-p> "0p
-
-
-
-
-"session config
-let g:session_autoload = 'no'
-let g:session_autosave = 'yes'
-let g:session_autosave_to = 'default'
-let g:session_verbose_messages = 0
-
-
-
-""""" enable 24bit true color
-"airline config
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-let g:airline_theme='deus'
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-
-
-" mapping for buffers control
-nmap <S-H> :bprev<CR>
-nmap <S-L> :bnext<CR>
-
-
-
-" If you have vim >=8.0 or Neovim >= 0.1.5
-if (has('termguicolors'))
- set termguicolors
-endif
-
 " For Neovim 0.1.3 and 0.1.4
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
@@ -211,7 +138,10 @@ colorscheme candid "night-owl palenight nord onedark candid
 
 filetype indent plugin on
 syntax on
-
+" If you have vim >=8.0 or Neovim >= 0.1.5
+if (has('termguicolors'))
+ set termguicolors
+endif
 set clipboard=unnamedplus
 set number
 set noswapfile
@@ -261,8 +191,10 @@ set backupdir=~/.local/share/nvim/backup
 set nobackup
 set nowritebackup
 set cmdheight=1
-set updatetime=50
+set updatetime=300
 set shortmess+=c
+" Add status line support, for integration with other plugin, checkout `:h coc-status`
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
@@ -274,19 +206,166 @@ else
 endif
 
 
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+"
+"
+"
+" ===================  Let =======================
+"
+"
+"
+
+let mapleader = ' '
+" screenshots
+let g:carbon_now_sh_options =
+\ { 'ln': 'false',
+\ 'fm': 'Fira Code',
+\ 't':'night-owl'}
+"session config
+let g:session_autoload = 'no'
+let g:session_autosave = 'yes'
+let g:session_autosave_to = 'default'
+let g:session_verbose_messages = 0
+"DoGE settings
+let g:doge_mapping = '<leader><leader>d'
+" echodoc configs
+let g:echodoc#enable_at_startup = 1
+let g:echodoc#type = 'popup'
+"start page
+let g:startify_session_dir = '~/.vim/sessions'
+""""" enable 24bit true color
+"airline config
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme='deus'
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:emmetJsx = 1
+let g:clap_insert_mode_only = 'true'
+let g:EasyMotion_startofline = 0 
+let g:EasyMotion_smartcase = 1
+
+
+
+
+"
+"
+"
+"
+" ===================== Functions ==========================
+"
+"
+"
+"
+"
 "
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
 
-inoremap <silent><expr> <Tab>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<Tab>" :
-      \ coc#refresh()
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 
+" Remap for do codeAction of selected region
+function! s:cocActionsOpenFromSelected(type) abort
+  execute 'CocCommand actions.open ' . a:type
+endfunction
+
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command, '--preview', '~/.vim/plugged/fzf.vim/bin/preview.sh {}']}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+function! s:config_easyfuzzymotion(...) abort
+  return extend(copy({
+  \   'converters': [incsearch#config#fuzzyword#converter()],
+  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+  \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+  \   'is_expr': 0,
+  \   'is_stay': 1
+  \ }), get(a:, 1, {}))
+endfunction
+
+" returns all modified files of the current git repo
+" `2>/dev/null` makes the command fail quietly, so that when we are not
+" in a git repo, the list will be empty
+function! s:gitModified()
+    let files = systemlist('git ls-files -m 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+endfunction
+
+" same as above, but show untracked files, honouring .gitignore
+function! s:gitUntracked()
+    let files = systemlist('git ls-files -o --exclude-standard 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+endfunction
+
+
+
+
+"
+"
+"
+"
+"
+"==================== Let with functions =========================
+"
+"
+"
+"
+"
+let g:startify_lists = [
+        \ { 'type': 'files',     'header': ['   MRU']            },
+        \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+        \ { 'type': 'sessions',  'header': ['   Sessions']       },
+        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+        \ { 'type': function('s:gitModified'),  'header': ['   git modified']},
+        \ { 'type': function('s:gitUntracked'), 'header': ['   git untracked']},
+        \ { 'type': 'commands',  'header': ['   Commands']       },
+        \ ]
+
+
+
+
+
+
+
+"
+"
+"
+" ====================== Map ========================
+"
+"
+"
+"
+
+" mapping for buffers control
+nmap <S-H> :bprev<CR>
+nmap <S-L> :bnext<CR>
+map <leader><leader>s :Startify<CR>
+vnoremap <F3> :CarbonNowSh<CR>
+nnoremap <F5> :UndotreeToggle<cr>
+" save mappings
+nmap <C-S> :w<CR> 
+imap <C-S> <C-O>:w<CR>
+nmap <C-A> :noa w<CR>  
+imap <C-A> <C-O>:noa w<CR>
+" Delete /Cut mapping
+nnoremap <leader>d d
+xnoremap <leader>d d
+
+nnoremap <leader>dd dd
+nnoremap <leader>D D
+" mapping / mapping mapping
+imap <C-p> <C-o>"+p
+vmap <s-p> "0p
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
@@ -303,99 +382,27 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
+
 " Map open terminal in root directory
 nmap <silent> <leader>t :silent exec "!gnome-terminal &"<CR>
 "imap <silent> <C-`> <C-O>:silent exec !gnome-terminal"<CR>
-
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-
-
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
-
 " Remap for format selected region
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
-
- let g:emmetJsx = 1
-augroup mygroup
-
-  "au BufWritePost * nested checktime %
-
-  au GUIEnter * simalt ~x
-  au BufNewFile,BufRead *.ejs set filetype=html
-
-  autocmd CursorHold * silent syntax sync fromstart
-
-  " Highlight symbol under cursor on CursorHold
-  autocmd CursorHold * silent call CocActionAsync('highlight')
-
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-
- autocmd FileType apache setlocal commentstring=#\ %s
-
-
-
-autocmd CursorMoved,CursorMovedI,BufEnter *
-\   if exists('*IsStyledDefinition') |
-\     if IsStyledDefinition(line('.')) && g:emmetJsx |
-\       call coc#config('emmet.includeLanguages', { "javascript": "css" } ) |
-\       let g:emmetJsx = 0 |
-\     elseif !IsStyledDefinition(line('.')) && !g:emmetJsx |
-\       call coc#config('emmet.includeLanguages', { "javascript": "javascriptreact" } ) |
-\       let g:emmetJsx = 1 |
-\     endif |
-\   endif
-
-autocmd CursorMoved,BufEnter *
-\   if &filetype == "coc-explorer" |
-\     execute "norm 0" |
-\   endif
-
-augroup end
-
-" Remap for do codeAction of selected region
-function! s:cocActionsOpenFromSelected(type) abort
-  execute 'CocCommand actions.open ' . a:type
-endfunction
 xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
 nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
-
-
-
 " Remap for do codeAction of current line
 nmap <silent> <leader>ac  :<C-u> CocCommand actions.open<cr>
 " Fix autofix problem of current line
 nmap <leader>qf  <Plug>(coc-fix-current)
-
-
-
-" Use `:Format` to format current buffer
-command! -nargs=0 Format :call CocAction('format')
-
-" Use `:Fold` to fold current buffer
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" use `:OR` for organize import of current buffer
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-" Add status line support, for integration with other plugin, checkout `:h coc-status`
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
 " Using CocList
 " Show all diagnostics
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
@@ -413,37 +420,166 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-
-
 map <leader>fs :CocCommand eslint.executeAutofix<CR>
-
 map <silent> <leader>ff :call CocAction('format')<CR>
-
-
-
-
 map <leader>fa <leader>xs<leader>xf
-
-
-function! RipgrepFzf(query, fullscreen)
-  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
-  let initial_command = printf(command_fmt, shellescape(a:query))
-  let reload_command = printf(command_fmt, '{q}')
-  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command, '--preview', '~/.vim/plugged/fzf.vim/bin/preview.sh {}']}
-  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
-endfunction
-
-command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
-
-
 "Clap
 map <leader><leader>g :Clap grep<Cr>
 map <leader><leader>f :Clap files<CR>
 map <leader><leader>p :Clap providers<CR>
-let g:clap_insert_mode_only = 'true'
-
 imap <C-F> <C-O>:Cp<CR>
+" Buffers delete
+nnoremap <silent> <C-q> :Bdelete menu<CR>
+"easy motion
+map <Leader> <Plug>(easymotion-prefix)
+noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
+" Gif config
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+" These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
+" Without these mappings, `n` & `N` works fine. (These mappings just provide
+" different highlight method and have some other features )
+map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+" s{char}{char} to move to {char}{char}
+nmap s <Plug>(easymotion-overwin-f2)
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
+" Gif config
+map <Leader>l <Plug>(easymotion-lineforward)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map <Leader>h <Plug>(easymotion-linebackward)
+" Remapping for windows movements
+nnoremap <leader>h :wincmd h<CR>
+nnoremap <leader>j :wincmd j<CR>
+nnoremap <leader>k :wincmd k<CR>
+nnoremap <leader>l :wincmd l<CR>
+nnoremap <leader>u :UndotreeShow<CR>
+nnoremap <Leader>+ :vertical resize +5<CR>
+nnoremap <Leader>- :vertical resize -5<CR>
 
+" Maps for fugitive
+nmap <leader>gj :diffget //3<CR>
+nmap <leader>gf :diffget //2<CR>
+" Coc-git keymaps
+" navigate chunks of current buffer
+nmap [g <Plug>(coc-git-prevchunk)
+nmap ]g <Plug>(coc-git-nextchunk)
+" show chunk diff at current position
+nmap gs <Plug>(coc-git-chunkinfo)
+" show commit contains current position
+nmap <leader>gc <Plug>(coc-git-commit)
+" create text object for git chunks
+omap ig <Plug>(coc-git-chunk-inner)
+xmap ig <Plug>(coc-git-chunk-inner)
+omap ag <Plug>(coc-git-chunk-outer)
+xmap ag <Plug>(coc-git-chunk-outer)
+
+
+
+
+
+"
+"
+"
+"
+" ==================== Augroup =====================
+"
+"
+"
+"
+"
+"
+augroup mygroup
+
+  "au BufWritePost * nested checktime %
+
+" au GUIEnter * simalt ~x
+"  au BufNewFile,BufRead *.ejs set filetype=html
+
+"  autocmd CursorHold * silent syntax sync fromstart
+
+  " Highlight symbol under cursor on CursorHold
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+
+" autocmd FileType apache setlocal commentstring=#\ %s
+
+
+
+" autocmd CursorMoved,CursorMovedI,BufEnter *
+" \   if exists('*IsStyledDefinition') |
+" \     if IsStyledDefinition(line('.')) && g:emmetJsx |
+" \       call coc#config('emmet.includeLanguages', { 'javascript': 'css' } ) |
+" \       let g:emmetJsx = 0 |
+" \     elseif !IsStyledDefinition(line('.')) && !g:emmetJsx |
+" \       call coc#config('emmet.includeLanguages', { 'javascript': 'javascriptreact' } ) |
+" \       let g:emmetJsx = 1 |
+" \     endif |
+" \   endif
+
+autocmd CursorMoved,BufEnter *
+\   if &filetype == "coc-explorer" |
+\     execute "norm 0" |
+\   endif
+
+augroup end
+
+
+
+"
+"
+"
+"
+"
+" ========================== Comands ===================
+"
+"
+"
+"
+"
+"
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+
+
+
+
+"
+"
+"
+"
+"
+" ==================== Call ====================
+"
+"
+"
+"
+"
+"
+"
 
 " Fake
 
@@ -482,94 +618,13 @@ call fake#define('email', 'tolower(substitute(printf("%s@%s.%s",'
 
 
 
-" Buffers delete
-nnoremap <silent> <C-q> :Bdelete menu<CR>
-
-"easy motion
-map <Leader> <Plug>(easymotion-prefix)
-function! s:config_easyfuzzymotion(...) abort
-  return extend(copy({
-  \   'converters': [incsearch#config#fuzzyword#converter()],
-  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-  \   'keymap': {"\<CR>": '<Over>(easymotion)'},
-  \   'is_expr': 0,
-  \   'is_stay': 1
-  \ }), get(a:, 1, {}))
-endfunction
-
-noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
-
-
-" Gif config
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
-" These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
-" Without these mappings, `n` & `N` works fine. (These mappings just provide
-" different highlight method and have some other features )
-map  n <Plug>(easymotion-next)
-map  N <Plug>(easymotion-prev)
-" <Leader>f{char} to move to {char}
-map  <Leader>f <Plug>(easymotion-bd-f)
-nmap <Leader>f <Plug>(easymotion-overwin-f)
-
-" s{char}{char} to move to {char}{char}
-nmap s <Plug>(easymotion-overwin-f2)
-
-" Move to line
-map <Leader>L <Plug>(easymotion-bd-jk)
-nmap <Leader>L <Plug>(easymotion-overwin-line)
-
-" Move to word
-map  <Leader>w <Plug>(easymotion-bd-w)
-nmap <Leader>w <Plug>(easymotion-overwin-w)
-" Gif config
-map <Leader>l <Plug>(easymotion-lineforward)
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-map <Leader>h <Plug>(easymotion-linebackward)
-" keep cursor column when JK motion
-
-let g:EasyMotion_startofline = 0 
-let g:EasyMotion_smartcase = 1
-
-"nnoremap <leader>ps :call pim#interrupt()<cr>
-
-" returns all modified files of the current git repo
-" `2>/dev/null` makes the command fail quietly, so that when we are not
-" in a git repo, the list will be empty
-function! s:gitModified()
-    let files = systemlist('git ls-files -m 2>/dev/null')
-    return map(files, "{'line': v:val, 'path': v:val}")
-endfunction
-
-" same as above, but show untracked files, honouring .gitignore
-function! s:gitUntracked()
-    let files = systemlist('git ls-files -o --exclude-standard 2>/dev/null')
-    return map(files, "{'line': v:val, 'path': v:val}")
-endfunction
-
-let g:startify_lists = [
-        \ { 'type': 'files',     'header': ['   MRU']            },
-        \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
-        \ { 'type': 'sessions',  'header': ['   Sessions']       },
-        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-        \ { 'type': function('s:gitModified'),  'header': ['   git modified']},
-        \ { 'type': function('s:gitUntracked'), 'header': ['   git untracked']},
-        \ { 'type': 'commands',  'header': ['   Commands']       },
-        \ ]
-
-" Remapping for windows movements
-nnoremap <leader>h :wincmd h<CR>
-nnoremap <leader>j :wincmd j<CR>
-nnoremap <leader>k :wincmd k<CR>
-nnoremap <leader>l :wincmd l<CR>
-nnoremap <leader>u :UndotreeShow<CR>
-nnoremap <Leader>+ :vertical resize +5<CR>
-nnoremap <Leader>- :vertical resize -5<CR>
-
-" Maps for fugitive
-nmap <leader>gj :diffget //3<CR>
-nmap <leader>gf :diffget //2<CR>
+"
+"
+"
+"===================== Highlight ========================
+"
+"
+"
 
 " Git conflict markers settings
 highlight ConflictMarkerBegin guibg=#2f7366
@@ -578,18 +633,5 @@ highlight ConflictMarkerTheirs guibg=#344f69
 highlight ConflictMarkerEnd guibg=#2f628e
 
 
-" Coc-git keymaps
-" navigate chunks of current buffer
-nmap [g <Plug>(coc-git-prevchunk)
-nmap ]g <Plug>(coc-git-nextchunk)
-" show chunk diff at current position
-nmap gs <Plug>(coc-git-chunkinfo)
-" show commit contains current position
-nmap <leader>gc <Plug>(coc-git-commit)
-" create text object for git chunks
-omap ig <Plug>(coc-git-chunk-inner)
-xmap ig <Plug>(coc-git-chunk-inner)
-omap ag <Plug>(coc-git-chunk-outer)
-xmap ag <Plug>(coc-git-chunk-outer)
 
 

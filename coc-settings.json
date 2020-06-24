@@ -1,11 +1,11 @@
 {
-	"coc.preferences.formatOnSaveFiletypes-----": [
+	"coc.preferences.formatOnSaveFiletypesss": [
 		"css",
 		"Markdown",
-		"javascript",
 		"html",
-		"javascriptreact",
 		"json",
+		"javascript",
+		"javascriptreact",
 		"jsonc",
 		"vim",
 		"scss"
@@ -13,7 +13,6 @@
 	"java.enabled": false,
 	"git.enableGutters": true,
 	"git.addGBlameToVirtualText": true,
-	"diagnostic.refreshOnInsertMode": true,
 	"diagnostic-languageserver.filetypes": {
 		"vim": "vint",
 		"markdown": "write-good",
@@ -40,15 +39,14 @@
 		}
 	},
 
-
-	"prettier.stylelintIntegration": true,
+	"prettier.stylelintIntegration": false,
 	"prettier.eslintIntegration": true,
 	"suggest.noselect": false,
 	"suggest.autoTrigger": "always",
 	"suggest.timeout": 500,
 	"suggest.acceptSuggestionOnCommitCharacter": true,
 	"suggest.echodocSupport": true,
-	"eslint.autoFixOnSave": true,
+	"eslint.autoFixOnSave": false,
 	"eslint.codeAction.showDocumentation": {
 		"enable": true
 	},
@@ -124,6 +122,7 @@
 		"Unmount",
 		"Untracked",
 		"debounced",
+		"dropzone",
 		"ellipsize",
 		"financials",
 		"helpdesk",
