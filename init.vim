@@ -7,13 +7,11 @@ call plug#begin('~/.vim/plugged')
     Plug 'inkarkat/vim-visualrepeat'
     " Brings physics-based smooth scrolling
     Plug 'yuttie/comfortable-motion.vim'
-    " Color scheme
-    Plug 'arcticicestudio/nord-vim'
     " A dark colorscheme with vibrant colors
     Plug 'flrnprz/candid.vim'
     "Plug 'mileszs/ack.vim'
     "A Git wrapper
-    Plug 'tpope/vim-fugitive'
+   Plug 'tpope/vim-fugitive'
     " Fake data generator
     Plug 'tkhren/vim-fake'
     " Buffers close menu
@@ -98,6 +96,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'svermeulen/vim-cutlass'
     " Vim plugin that provides additional text objects
     Plug 'wellle/targets.vim'
+    " Color scheme
+    Plug 'arcticicestudio/nord-vim'
 call plug#end()
 
  call coc_plug#begin()
@@ -129,12 +129,54 @@ call plug#end()
     CocPlug 'coc-css' 
 call coc_plug#end()
 
-" For Neovim 0.1.3 and 0.1.4
+
+
+
+"
+"
+"
+" ===================  Let =======================
+"
+"
+"
+
+let mapleader = ' '
+" screenshots
+let g:carbon_now_sh_options =
+\ { 'ln': 'false',
+\ 'fm': 'Fira Code',
+\ 't':'night-owl'}
+"session config
+let g:session_autoload = 'no'
+let g:session_autosave = 'yes'
+let g:session_autosave_to = 'default'
+let g:session_verbose_messages = 0
+"DoGE settings
+let g:doge_mapping = '<leader><leader>d'
+" echodoc configs
+let g:echodoc#enable_at_startup = 1
+let g:echodoc#type = 'popup'
+"start page
+let g:startify_session_dir = '~/.vim/sessions'
+""""" enable 24bit true color
+"airline config
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme='nord' "deus
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:emmetJsx = 1
+let g:clap_insert_mode_only = 'true'
+let g:EasyMotion_startofline = 0 
+let g:EasyMotion_smartcase = 1
+let g:nord_uniform_diff_background = 1
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+
+
+
 
 " List occurrences for search
 
-colorscheme candid "night-owl palenight nord onedark candid
+colorscheme nord "night-owl palenight nord onedark candid
 
 filetype indent plugin on
 syntax on
@@ -204,45 +246,6 @@ if has('patch-8.1.1564')
 else
   set signcolumn=yes
 endif
-
-
-"
-"
-"
-" ===================  Let =======================
-"
-"
-"
-
-let mapleader = ' '
-" screenshots
-let g:carbon_now_sh_options =
-\ { 'ln': 'false',
-\ 'fm': 'Fira Code',
-\ 't':'night-owl'}
-"session config
-let g:session_autoload = 'no'
-let g:session_autosave = 'yes'
-let g:session_autosave_to = 'default'
-let g:session_verbose_messages = 0
-"DoGE settings
-let g:doge_mapping = '<leader><leader>d'
-" echodoc configs
-let g:echodoc#enable_at_startup = 1
-let g:echodoc#type = 'popup'
-"start page
-let g:startify_session_dir = '~/.vim/sessions'
-""""" enable 24bit true color
-"airline config
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-let g:airline_theme='deus'
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-let g:emmetJsx = 1
-let g:clap_insert_mode_only = 'true'
-let g:EasyMotion_startofline = 0 
-let g:EasyMotion_smartcase = 1
-
 
 
 
@@ -438,7 +441,7 @@ map  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 " These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
 " Without these mappings, `n` & `N` works fine. (These mappings just provide
-" different highlight method and have some other features )
+" " different highlight method and have some other features )
 map  n <Plug>(easymotion-next)
 map  N <Plug>(easymotion-prev)
 " <Leader>f{char} to move to {char}
@@ -627,11 +630,18 @@ call fake#define('email', 'tolower(substitute(printf("%s@%s.%s",'
 "
 
 " Git conflict markers settings
-highlight ConflictMarkerBegin guibg=#2f7366
-highlight ConflictMarkerOurs guibg=#2e5049
-highlight ConflictMarkerTheirs guibg=#344f69
-highlight ConflictMarkerEnd guibg=#2f628e
+" highlight ConflictMarkerBegin guibg=#2f7366
+" highlight ConflictMarkerOurs guibg=#2e5049
+" highlight ConflictMarkerTheirs guibg=#344f69
+" highlight ConflictMarkerEnd guibg=#2f628e
 
+"hi link EasyMotionTarget ErrorMsg
+hi link EasyMotionShade  Comment
 
+hi link EasyMotionTarget2First MatchParen
+hi link EasyMotionTarget2Second MatchParen
+
+hi link EasyMotionMoveHL Search
+hi link EasyMotionIncSearch Search
 
 

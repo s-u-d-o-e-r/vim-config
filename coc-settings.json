@@ -133,5 +133,10 @@
 	"prettier.singleQuote": true,
 	"prettier.printWidth": 100,
 	"prettier.useTabs": true,
-	"prettier.tabWidth": 2
+	"prettier.tabWidth": 2,
+	"git.addedSign.hlGroup": "GitGutterAdd",
+	"git.changedSign.hlGroup": "GitGutterChange",
+	"git.removedSign.hlGroup": "GitGutterDelete",
+	"git.topRemovedSign.hlGroup": "GitGutterDelete",
+	"git.changeRemovedSign.hlGroup": "GitGutterChangeDelete"
 }
