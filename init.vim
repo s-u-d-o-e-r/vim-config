@@ -26,7 +26,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'Shougo/neoinclude.vim'
     " Include source for coc.nvim
     Plug 'jsfaint/coc-neoinclude'
-    Plug 'neoclide/coc.nvim', {'branch': 'release','tag': '*', 'do': { -> coc#util#install()}}
+    Plug 'neoclide/coc.nvim',   {'branch': 'release','do': { -> coc#util#install()}}
     " Color scheme
     Plug 'haishanh/night-owl.vim'
     " Screenshot maker
@@ -232,6 +232,10 @@ set undoreload=10000
 set backupdir=~/.local/share/nvim/backup
 set nobackup
 set nowritebackup
+
+setlocal nobackup
+setlocal nowritebackup
+
 set cmdheight=1
 set updatetime=300
 set shortmess+=c
@@ -503,12 +507,12 @@ xmap ag <Plug>(coc-git-chunk-outer)
 "
 augroup mygroup
 
-  "au BufWritePost * nested checktime %
+" au BufWritePost * nested checktime %
 
-" au GUIEnter * simalt ~x
-"  au BufNewFile,BufRead *.ejs set filetype=html
+ au GUIEnter * simalt ~x
+  au BufNewFile,BufRead *.ejs set filetype=html
 
-"  autocmd CursorHold * silent syntax sync fromstart
+  autocmd CursorHold * silent syntax sync fromstart
 
   " Highlight symbol under cursor on CursorHold
   autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -519,20 +523,20 @@ augroup mygroup
   " Update signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 
-" autocmd FileType apache setlocal commentstring=#\ %s
+ autocmd FileType apache setlocal commentstring=#\ %s
 
 
 
-" autocmd CursorMoved,CursorMovedI,BufEnter *
-" \   if exists('*IsStyledDefinition') |
-" \     if IsStyledDefinition(line('.')) && g:emmetJsx |
-" \       call coc#config('emmet.includeLanguages', { 'javascript': 'css' } ) |
-" \       let g:emmetJsx = 0 |
-" \     elseif !IsStyledDefinition(line('.')) && !g:emmetJsx |
-" \       call coc#config('emmet.includeLanguages', { 'javascript': 'javascriptreact' } ) |
-" \       let g:emmetJsx = 1 |
-" \     endif |
-" \   endif
+ autocmd CursorMoved,CursorMovedI,BufEnter *
+ \   if exists('*IsStyledDefinition') |
+ \     if IsStyledDefinition(line('.')) && g:emmetJsx |
+ \       call coc#config('emmet.includeLanguages', { 'javascript': 'css' } ) |
+ \       let g:emmetJsx = 0 |
+ \     elseif !IsStyledDefinition(line('.')) && !g:emmetJsx |
+ \       call coc#config('emmet.includeLanguages', { 'javascript': 'javascriptreact' } ) |
+ \       let g:emmetJsx = 1 |
+ \     endif |
+ \   endif
 
 autocmd CursorMoved,BufEnter *
 \   if &filetype == "coc-explorer" |

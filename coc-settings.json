@@ -19,6 +19,7 @@
 		"sh": "shellcheck",
 		"php": "phpstan"
 	},
+	"diagnostic.refreshOnInsertMode": false,
 	"diagnostic-languageserver.linters": {
 		"vint": {
 			"command": "vint",
