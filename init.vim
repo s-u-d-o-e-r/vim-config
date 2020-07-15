@@ -1,6 +1,6 @@
 call plug#begin('~/.vim/plugged')
     " Auto-completion for quotes, parens, brackets
-"    Plug 'Raimondi/delimitMate'
+"   Plug 'Raimondi/delimitMate'
     " Enable repeating supported plugin maps with '.'
     Plug 'tpope/vim-repeat'
     " Repeat command extended to visual mode.
@@ -11,7 +11,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'flrnprz/candid.vim'
     "Plug 'mileszs/ack.vim'
     "A Git wrapper
-   Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-fugitive'
     " Fake data generator
     Plug 'tkhren/vim-fake'
     " Buffers close menu
@@ -98,6 +98,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'wellle/targets.vim'
     " Color scheme
     Plug 'arcticicestudio/nord-vim'
+    "Git branch search using ctrlp.vim.
+    Plug 'imkmf/ctrlp-branches'
 call plug#end()
 
  call coc_plug#begin()
@@ -170,8 +172,12 @@ let g:EasyMotion_startofline = 0
 let g:EasyMotion_smartcase = 1
 let g:nord_uniform_diff_background = 1
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-
-
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+let g:ctrlp_extensions = [
+\ 'branches',
+\ ]
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlPMRU'
 
 
 " List occurrences for search
@@ -507,6 +513,21 @@ xmap ag <Plug>(coc-git-chunk-outer)
 "
 augroup mygroup
 
+  autocmd CmdLineEnter : let g:prev_hls = &hlsearch
+  autocmd CmdLineChanged : let g:cmd = getcmdline() |
+\  if g:cmd =~# "^%\\?S.*/" |
+\    let g:splitcmd = split(g:cmd, '/') |
+\    let g:search_pat = len(g:splitcmd) >= 2 ? substitute(join(g:splitcmd[0:1], '/'), '^%', '', '') : '' |
+\    if !empty(g:search_pat) |
+\      try |
+\        silent exec "norm \<Cmd>set hls|0verbose " . g:search_pat . "/\<CR>" |
+\        catch /^Vim\%((\a\+)\)\=:E/ |
+\      endtry |
+\      silent exec "norm N" |
+\      redraw! |
+\    endif |
+\  endif
+  autocmd CmdLineLeave : let &hlsearch = g:prev_hls
 " au BufWritePost * nested checktime %
 
  au GUIEnter * simalt ~x
