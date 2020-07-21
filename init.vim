@@ -100,6 +100,10 @@ call plug#begin('~/.vim/plugged')
     Plug 'arcticicestudio/nord-vim'
     "Git branch search using ctrlp.vim.
     Plug 'imkmf/ctrlp-branches'
+    "emmet-vim is a vim plug-in which provides support for expanding abbreviations similar to emmet.
+    Plug 'mattn/emmet-vim'
+    "An always-on highlight for a unique character in every word on a line to help you use f, F and family.
+    Plug 'unblevable/quick-scope'
 call plug#end()
 
  call coc_plug#begin()
@@ -133,6 +137,23 @@ call coc_plug#end()
 
 
 
+"
+"
+"
+" ===================  Stuff that should be before let and set =======================
+"
+"
+"
+
+
+
+
+" setted color for quick scope plugin
+augroup qs_colors
+  autocmd!
+  autocmd ColorScheme * highlight QuickScopePrimary guibg='#434C5E' gui=underline cterm=underline
+  autocmd ColorScheme * highlight QuickScopeSecondary  gui=underline cterm=underline
+augroup END
 
 "
 "
@@ -495,8 +516,10 @@ omap ig <Plug>(coc-git-chunk-inner)
 xmap ig <Plug>(coc-git-chunk-inner)
 omap ag <Plug>(coc-git-chunk-outer)
 xmap ag <Plug>(coc-git-chunk-outer)
-
-
+" Map the leader key + q to toggle quick-scope's highlighting in normal/visual mode.
+" Note that you must use nmap/xmap instead of their non-recursive versions (nnoremap/xnoremap).
+nmap <leader>q <plug>(QuickScopeToggle)
+xmap <leader>q <plug>(QuickScopeToggle)
 
 
 
@@ -512,23 +535,6 @@ xmap ag <Plug>(coc-git-chunk-outer)
 "
 "
 augroup mygroup
-
-  autocmd CmdLineEnter : let g:prev_hls = &hlsearch
-  autocmd CmdLineChanged : let g:cmd = getcmdline() |
-\  if g:cmd =~# "^%\\?S.*/" |
-\    let g:splitcmd = split(g:cmd, '/') |
-\    let g:search_pat = len(g:splitcmd) >= 2 ? substitute(join(g:splitcmd[0:1], '/'), '^%', '', '') : '' |
-\    if !empty(g:search_pat) |
-\      try |
-\        silent exec "norm \<Cmd>set hls|0verbose " . g:search_pat . "/\<CR>" |
-\        catch /^Vim\%((\a\+)\)\=:E/ |
-\      endtry |
-\      silent exec "norm N" |
-\      redraw! |
-\    endif |
-\  endif
-  autocmd CmdLineLeave : let &hlsearch = g:prev_hls
-" au BufWritePost * nested checktime %
 
  au GUIEnter * simalt ~x
   au BufNewFile,BufRead *.ejs set filetype=html
@@ -563,6 +569,27 @@ autocmd CursorMoved,BufEnter *
 \   if &filetype == "coc-explorer" |
 \     execute "norm 0" |
 \   endif
+
+
+
+
+  autocmd CmdLineEnter : let g:prev_hls = &hlsearch
+  autocmd CmdLineChanged : let g:cmd = getcmdline() |
+\  if g:cmd =~# "^%\\?S.*/" |
+\    let g:splitcmd = split(g:cmd, '/') |
+\    let g:search_pat = len(g:splitcmd) >= 2 ? substitute(join(g:splitcmd[0:1], '/'), '^%', '', '') : '' |
+\    if !empty(g:search_pat) |
+\      try |
+\        silent exec "norm \<Cmd>set hls|0verbose " . g:search_pat . "/\<CR>" |
+\        catch /^Vim\%((\a\+)\)\=:E/ |
+\      endtry |
+\      silent exec "norm N" |
+\      redraw! |
+\    endif |
+\  endif
+  autocmd CmdLineLeave : let &hlsearch = g:prev_hls
+" au BufWritePost * nested checktime %
+
 
 augroup end
 
