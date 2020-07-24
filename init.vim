@@ -106,12 +106,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'unblevable/quick-scope'
     "sandwich.vim is a set of operator and textobject plugins to add/delete/replace surroundings of a sandwiched textobject, like (foo), 'bar'.
     Plug 'machakann/vim-sandwich'
-    "This plugin provides text object mappings ib and ab.
-    "ib is a union of i(, i{, i[, i', i" and i<.
-    "ab is a union of a(, a{, a[, a', a" and a<.
-    Plug 'rhysd/vim-textobj-anyblock'
-    "vim-textobj-user is a Vim plugin to create your own text objects without pain. needed for anyblock 
-    Plug 'kana/vim-textobj-user'
 call plug#end()
 
  call coc_plug#begin()
