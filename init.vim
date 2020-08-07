@@ -20,8 +20,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'epilande/vim-react-snippets'
     " Switch between single-line and multiline forms of code gS - spit / gJ - join
     Plug 'AndrewRadev/splitjoin.vim'
-    Plug 'junegunn/fzf' , { 'do': { -> fzf#install() } }
-    Plug 'junegunn/fzf.vim'
+    " Plug 'junegunn/fzf' , { 'do': { -> fzf#install() } }
+    " Plug 'junegunn/fzf.vim'
     " Include source for coc.nvim
     Plug 'Shougo/neoinclude.vim'
     " Include source for coc.nvim
