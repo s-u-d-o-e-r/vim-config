@@ -8,7 +8,7 @@ call plug#begin('~/.vim/plugged')
     " Brings physics-based smooth scrolling
     Plug 'yuttie/comfortable-motion.vim'
     " A dark colorscheme with vibrant colors
-    Plug 'flrnprz/candid.vim'
+    " Plug 'flrnprz/candid.vim'
     "Plug 'mileszs/ack.vim'
     "A Git wrapper
     Plug 'tpope/vim-fugitive'
@@ -26,13 +26,13 @@ call plug#begin('~/.vim/plugged')
     Plug 'Shougo/neoinclude.vim'
     " Include source for coc.nvim
     Plug 'jsfaint/coc-neoinclude'
-    Plug 'neoclide/coc.nvim',   {'branch': 'release','do': { -> coc#util#install()}}
+    Plug 'neoclide/coc.nvim',   {'branch': 'release'}
     " Color scheme
-    Plug 'haishanh/night-owl.vim'
+    " Plug 'haishanh/night-owl.vim'
     " Screenshot maker
     Plug 'kristijanhusak/vim-carbon-now-sh'
     " A lightweight and powerful git branch viewer for vim.
-    Plug 'rbong/vim-flog'
+    " Plug 'rbong/vim-flog'
     " A solid language pack for Vim.
     Plug 'sheerun/vim-polyglot'
     " Fuzzy file, buffer, mru, tag, etc finder
@@ -74,8 +74,8 @@ call plug#begin('~/.vim/plugged')
     " A Vim plugin which shows git diff markers in the sign column
     Plug 'airblade/vim-gitgutter'
     " Use RipGrep in Vim and display results in a quickfix list
-    Plug 'jremmen/vim-ripgrep'
-    " Changes Vim working directory to project root (identified by presence of known directory or file).
+    " Plug 'jremmen/vim-ripgrep'
+    " Changes Vim working directory to project root (i dentified by presence of known directory or file).
     Plug 'airblade/vim-rooter'
     " Vim motions on speed!
     Plug 'easymotion/vim-easymotion'
@@ -106,6 +106,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'unblevable/quick-scope'
     "sandwich.vim is a set of operator and textobject plugins to add/delete/replace surroundings of a sandwiched textobject, like (foo), 'bar'.
     Plug 'machakann/vim-sandwich'
+    "Hardtime helps you break that annoying habit vimmers have of scrolling up and down the page using jjjjj and kkkkk but without compromising the rest of our vim experience.
+    Plug 'takac/vim-hardtime'
 call plug#end()
 
  call coc_plug#begin()
@@ -202,9 +204,11 @@ let g:ctrlp_extensions = [
 \ ]
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlPMRU'
-
-
-" List occurrences for search
+let g:hardtime_default_on = 1
+let g:hardtime_ignore_buffer_patterns = [ "coc-explorer", "NERD.*" ]
+let g:hardtime_ignore_quickfix = 1
+let g:hardtime_allow_different_key = 1
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.5 } }
 
 colorscheme nord "night-owl palenight nord onedark candid
 
@@ -461,7 +465,7 @@ map <leader>fs :CocCommand eslint.executeAutofix<CR>
 map <silent> <leader>ff :call CocAction('format')<CR>
 map <leader>fa <leader>xs<leader>xf
 "Clap
-map <leader><leader>g :Clap grep<Cr>
+map <leader><leader>g :Clap grep2<Cr>
 map <leader><leader>f :Clap files<CR>
 map <leader><leader>p :Clap providers<CR>
 imap <C-F> <C-O>:Cp<CR>
@@ -523,6 +527,10 @@ xmap ag <Plug>(coc-git-chunk-outer)
 " Note that you must use nmap/xmap instead of their non-recursive versions (nnoremap/xnoremap).
 nmap <leader>q <plug>(QuickScopeToggle)
 xmap <leader>q <plug>(QuickScopeToggle)
+
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 
 
@@ -620,7 +628,7 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 " use `:OR` for organize import of current buffer
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
-command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+command! -nargs=* -bang Rg call RipgrepFzf(<q-args>, <bang>0)
 
 
 

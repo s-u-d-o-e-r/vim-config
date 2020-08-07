@@ -23,7 +23,6 @@
 		"php": "phpstan"
 	},
 	"diagnostic.refreshOnInsertMode": false,
-	"diagnostic.refreshAfterSave": true,
 	"diagnostic-languageserver.linters": {
 		"vint": {
 			"command": "vint",
@@ -82,7 +81,7 @@
 	"git.removedSign.hlGroup": "GitGutterDelete",
 	"git.topRemovedSign.hlGroup": "GitGutterDelete",
 	"git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
-	"eslint.options": {
+	"eslint.optionsssssssss": {
 		"env": {
 			"browser": true,
 			"es6": true
