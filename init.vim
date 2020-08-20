@@ -168,12 +168,13 @@ augroup END
 "
 "
 
+let g:netrw_fastbrowse = 0
 let mapleader = ' '
 " screenshots
 let g:carbon_now_sh_options =
 \ { 'ln': 'false',
 \ 'fm': 'Fira Code',
-\ 't':'night-owl'}
+\ 't':'nord'}
 "session config
 let g:session_autoload = 'no'
 let g:session_autosave = 'yes'
@@ -406,7 +407,9 @@ nnoremap <leader>dd dd
 nnoremap <leader>D D
 " mapping / mapping mapping
 imap <C-p> <C-o>"+p
-vmap <s-p> "0p
+"map p "_dP
+
+vmap p "_dP
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
