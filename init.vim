@@ -1,6 +1,6 @@
 call plug#begin('~/.vim/plugged')
     " Auto-completion for quotes, parens, brackets
-"   Plug 'Raimondi/delimitMate'
+    Plug 'Raimondi/delimitMate'
     " Enable repeating supported plugin maps with '.'
     Plug 'tpope/vim-repeat'
     " Repeat command extended to visual mode.
@@ -107,7 +107,7 @@ call plug#begin('~/.vim/plugged')
     "sandwich.vim is a set of operator and textobject plugins to add/delete/replace surroundings of a sandwiched textobject, like (foo), 'bar'.
     Plug 'machakann/vim-sandwich'
     "Hardtime helps you break that annoying habit vimmers have of scrolling up and down the page using jjjjj and kkkkk but without compromising the rest of our vim experience.
-    Plug 'takac/vim-hardtime'
+    " Plug 'takac/vim-hardtime'
 call plug#end()
 
  call coc_plug#begin()
@@ -468,7 +468,7 @@ map <leader>fs :CocCommand eslint.executeAutofix<CR>
 map <silent> <leader>ff :call CocAction('format')<CR>
 map <leader>fa <leader>xs<leader>xf
 "Clap
-map <leader><leader>g :Clap grep2<Cr>
+map <leader><leader>g :Clap grep<Cr>
 map <leader><leader>f :Clap files<CR>
 map <leader><leader>p :Clap providers<CR>
 imap <C-F> <C-O>:Cp<CR>
