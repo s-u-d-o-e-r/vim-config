@@ -16,6 +16,8 @@
 	"emmet.optimizeStylesheetParsing": true,
 	"git.enableGutters": true,
 	"git.addGBlameToVirtualText": true,
+	"diagnostic.virtualText": true,
+	"codeLens.enable": true,
 	"diagnostic-languageserver.filetypes": {
 		"vim": "vint",
 		"markdown": "write-good",
@@ -60,6 +62,7 @@
 	},
 	"cSpell.userWords": [
 		"Chargebacks",
+		"TSYS",
 		"Unmount",
 		"Untracked",
 		"datasource",

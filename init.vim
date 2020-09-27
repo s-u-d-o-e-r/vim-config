@@ -1,6 +1,7 @@
 call plug#begin('~/.vim/plugged')
+    Plug 'espizo/vim-gitcommit-issue-id'
     " Auto-completion for quotes, parens, brackets
-    Plug 'Raimondi/delimitMate'
+    " Plug 'Raimondi/delimitMate'
     " Enable repeating supported plugin maps with '.'
     Plug 'tpope/vim-repeat'
     " Repeat command extended to visual mode.
@@ -108,6 +109,10 @@ call plug#begin('~/.vim/plugged')
     Plug 'machakann/vim-sandwich'
     "Hardtime helps you break that annoying habit vimmers have of scrolling up and down the page using jjjjj and kkkkk but without compromising the rest of our vim experience.
     " Plug 'takac/vim-hardtime'
+    "Treesitter configurations and abstraction layer for Neovim.
+    Plug 'nvim-treesitter/nvim-treesitter'
+    "Blazing fast minimap for vim, powered by 🛰 code-minimap written in Rust
+    Plug 'wfxr/minimap.vim'
 call plug#end()
 
  call coc_plug#begin()
@@ -168,6 +173,7 @@ augroup END
 "
 "
 
+let g:minimap_auto_start = 1
 let g:netrw_fastbrowse = 0
 let mapleader = ' '
 " screenshots
@@ -710,4 +716,17 @@ hi link EasyMotionTarget2Second MatchParen
 hi link EasyMotionMoveHL Search
 hi link EasyMotionIncSearch Search
 
+
+
+
+
+" lua <<EOF
+" require'nvim-treesitter.configs'.setup {
+"   ensure_installed = { 'javascript', 'typescript', 'html', 'json', 'css', 'php' } ,  
+"   highlight = {
+"     enable = true,                
+"     disable = { 'c', 'rust' },   
+"   },
+" }
+" EOF
 
