@@ -1,3 +1,5 @@
+" let g:polyglot_disabled = ['css', 'javascript', 'typescript', 'javascriptreact']
+
 call plug#begin('~/.vim/plugged')
     Plug 'espizo/vim-gitcommit-issue-id'
     " Auto-completion for quotes, parens, brackets
@@ -9,7 +11,7 @@ call plug#begin('~/.vim/plugged')
     " Brings physics-based smooth scrolling
     Plug 'yuttie/comfortable-motion.vim'
     " A dark colorscheme with vibrant colors
-    " Plug 'flrnprz/candid.vim'
+    Plug 'flrnprz/candid.vim'
     "Plug 'mileszs/ack.vim'
     "A Git wrapper
     Plug 'tpope/vim-fugitive'
@@ -29,7 +31,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'jsfaint/coc-neoinclude'
     Plug 'neoclide/coc.nvim',   {'branch': 'release'}
     " Color scheme
-    " Plug 'haishanh/night-owl.vim'
+    Plug 'haishanh/night-owl.vim'
     " Screenshot maker
     Plug 'kristijanhusak/vim-carbon-now-sh'
     " A lightweight and powerful git branch viewer for vim.
@@ -55,7 +57,7 @@ call plug#begin('~/.vim/plugged')
     " File extensions icons
     Plug 'ryanoasis/vim-devicons'
     " (Do)cumentation (Ge)nerator 15+ languages  Generate proper code documentation skeletons with a single keypress.
-    Plug 'kkoomen/vim-doge'
+    Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
     " Vim bundle for styled-components based javascript files.
     Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
     " A Vim plugin that provides GraphQL file detection, syntax highlighting, and indentation.
@@ -173,7 +175,6 @@ augroup END
 "
 "
 
-let g:minimap_auto_start = 1
 let g:netrw_fastbrowse = 0
 let mapleader = ' '
 " screenshots
@@ -718,14 +719,14 @@ hi link EasyMotionIncSearch Search
 
 
 
+" { 'javascript', 'typescript', 'html', 'json', 'css', 'php' } ,  
 
 
 " lua <<EOF
 " require'nvim-treesitter.configs'.setup {
-"   ensure_installed = { 'javascript', 'typescript', 'html', 'json', 'css', 'php' } ,  
+"   ensure_installed ="all",
 "   highlight = {
 "     enable = true,                
-"     disable = { 'c', 'rust' },   
 "   },
 " }
 " EOF
