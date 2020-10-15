@@ -51,9 +51,9 @@ call plug#begin('~/.vim/plugged')
     " Print documents in echo area.
     Plug 'Shougo/echodoc.vim'
     " Extended session management for Vim
-    " Plug 'xolox/vim-session'
+    Plug 'xolox/vim-session'
     " Session
-    Plug 'powerman/vim-plugin-autosess'
+    " Plug 'powerman/vim-plugin-autosess'
     " Required for vim-session
     Plug 'xolox/vim-misc'
     " File extensions icons
@@ -162,6 +162,14 @@ call coc_plug#end()
 "
 
 
+function! s:project_name()
+  let l:cwd = resolve(getcwd())
+  let l:cwd = substitute(l:cwd, '^'.$HOME.'/', '', '')
+  let l:cwd = fnamemodify(l:cwd, ':p:gs?/?_?')
+  let l:cwd = substitute(l:cwd, '^\.', '', '')
+  return l:cwd
+endfunction
+
 
 
 " setted color for quick scope plugin
@@ -179,8 +187,7 @@ augroup END
 "
 "
 
-
-let g:dashboard_custom_header= [
+  let g:dashboard_custom_header= [
         \'',
         \'██╗   ██╗██╗███╗   ███╗',
         \'██║   ██║██║████╗ ████║',
@@ -202,8 +209,9 @@ let g:carbon_now_sh_options =
 \ 'fm': 'Fira Code',
 \ 't':'nord'}
 "session config
-" let g:session_autoload = 'no'
-" let g:session_autosave = 'yes'
+let g:session_autoload = 'no'
+let g:session_autosave = 'yes'
+let g:session_default_name = fnameescape(s:project_name()) 
 " let g:session_autosave_to = 'default'
 " let g:session_verbose_messages = 0
 "DoGE settings
@@ -325,6 +333,8 @@ endif
 "
 "
 "
+"
+
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~ '\s'
