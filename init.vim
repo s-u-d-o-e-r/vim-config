@@ -51,7 +51,9 @@ call plug#begin('~/.vim/plugged')
     " Print documents in echo area.
     Plug 'Shougo/echodoc.vim'
     " Extended session management for Vim
-    Plug 'xolox/vim-session'
+    " Plug 'xolox/vim-session'
+    " Session
+    Plug 'powerman/vim-plugin-autosess'
     " Required for vim-session
     Plug 'xolox/vim-misc'
     " File extensions icons
@@ -71,7 +73,9 @@ call plug#begin('~/.vim/plugged')
     " Commentary.vim: comment stuff out 
     Plug 'tpope/vim-commentary'
     " The fancy start screen for Vim.
-    Plug 'mhinz/vim-startify'
+    " Plug 'mhinz/vim-startify'
+    " Vim dashboard
+    Plug 'glepnir/dashboard-nvim'
     " The open source plugin for productivity metrics, goals, leaderboards, and automatic time tracking.
     Plug 'wakatime/vim-wakatime'
     " A Vim plugin which shows git diff markers in the sign column
@@ -175,6 +179,21 @@ augroup END
 "
 "
 
+
+let g:dashboard_custom_header= [
+        \'',
+        \'██╗   ██╗██╗███╗   ███╗',
+        \'██║   ██║██║████╗ ████║',
+        \'██║   ██║██║██╔████╔██║',
+        \'╚██╗ ██╔╝██║██║╚██╔╝██║',
+        \' ╚████╔╝ ██║██║ ╚═╝ ██║',
+        \'  ╚═══╝  ╚═╝╚═╝     ╚═╝',
+        \''
+        \]
+
+
+
+
 let g:netrw_fastbrowse = 0
 let mapleader = ' '
 " screenshots
@@ -183,10 +202,10 @@ let g:carbon_now_sh_options =
 \ 'fm': 'Fira Code',
 \ 't':'nord'}
 "session config
-let g:session_autoload = 'no'
-let g:session_autosave = 'yes'
-let g:session_autosave_to = 'default'
-let g:session_verbose_messages = 0
+" let g:session_autoload = 'no'
+" let g:session_autosave = 'yes'
+" let g:session_autosave_to = 'default'
+" let g:session_verbose_messages = 0
 "DoGE settings
 let g:doge_mapping = '<leader><leader>d'
 " echodoc configs
