@@ -211,7 +211,7 @@ let g:carbon_now_sh_options =
 "session config
 let g:session_autoload = 'no'
 let g:session_autosave = 'yes'
-let g:session_default_name = fnameescape(s:project_name()) 
+let g:session_autosave_to = fnameescape(s:project_name()) 
 " let g:session_autosave_to = 'default'
 " let g:session_verbose_messages = 0
 "DoGE settings
