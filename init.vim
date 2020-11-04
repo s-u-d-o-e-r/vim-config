@@ -20,7 +20,7 @@ call plug#begin('~/.vim/plugged')
     " Buffers close menu
     Plug 'Asheq/close-buffers.vim'
     " React code snippets
-    Plug 'epilande/vim-react-snippets'
+    " Plug 'epilande/vim-react-snippets'
     " Switch between single-line and multiline forms of code gS - spit / gJ - join
     Plug 'AndrewRadev/splitjoin.vim'
     " Plug 'junegunn/fzf' , { 'do': { -> fzf#install() } }
@@ -53,7 +53,6 @@ call plug#begin('~/.vim/plugged')
     " Extended session management for Vim
     Plug 'xolox/vim-session'
     " Session
-    " Plug 'powerman/vim-plugin-autosess'
     " Required for vim-session
     Plug 'xolox/vim-misc'
     " File extensions icons
@@ -61,7 +60,7 @@ call plug#begin('~/.vim/plugged')
     " (Do)cumentation (Ge)nerator 15+ languages  Generate proper code documentation skeletons with a single keypress.
     Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
     " Vim bundle for styled-components based javascript files.
-    Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+    " Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
     " A Vim plugin that provides GraphQL file detection, syntax highlighting, and indentation.
     Plug 'jparise/vim-graphql'
     " Modern performant generic finder and dispatcher for Vim and NeoVim
@@ -87,7 +86,7 @@ call plug#begin('~/.vim/plugged')
     " Vim motions on speed!
     Plug 'easymotion/vim-easymotion'
     " Have Vim automatically reload a file that has changed externally
-    Plug 'djoshea/vim-autoread'
+    " Plug 'djoshea/vim-autoread'
     " Plugin manager for coc
     Plug 'theoldmoon0602/coc-plug'
     " Color scheme
@@ -108,7 +107,7 @@ call plug#begin('~/.vim/plugged')
     "Git branch search using ctrlp.vim.
     Plug 'imkmf/ctrlp-branches'
     "emmet-vim is a vim plug-in which provides support for expanding abbreviations similar to emmet.
-    Plug 'mattn/emmet-vim'
+    " Plug 'mattn/emmet-vim'
     "An always-on highlight for a unique character in every word on a line to help you use f, F and family.
     Plug 'unblevable/quick-scope'
     "sandwich.vim is a set of operator and textobject plugins to add/delete/replace surroundings of a sandwiched textobject, like (foo), 'bar'.
@@ -116,9 +115,9 @@ call plug#begin('~/.vim/plugged')
     "Hardtime helps you break that annoying habit vimmers have of scrolling up and down the page using jjjjj and kkkkk but without compromising the rest of our vim experience.
     " Plug 'takac/vim-hardtime'
     "Treesitter configurations and abstraction layer for Neovim.
-    Plug 'nvim-treesitter/nvim-treesitter'
+    " Plug 'nvim-treesitter/nvim-treesitter'
     "Blazing fast minimap for vim, powered by 🛰 code-minimap written in Rust
-    Plug 'wfxr/minimap.vim'
+    " Plug 'wfxr/minimap.vim'
 call plug#end()
 
  call coc_plug#begin()
@@ -149,6 +148,8 @@ call plug#end()
     CocPlug 'coc-html'
     CocPlug 'coc-css' 
     CocPlug 'coc-flow'
+    CocPlug 'coc-import-cost'
+    CocPlug 'coc-pairs'
 call coc_plug#end()
 
 
@@ -220,29 +221,34 @@ let g:doge_mapping = '<leader><leader>d'
 let g:echodoc#enable_at_startup = 1
 let g:echodoc#type = 'popup'
 "start page
-let g:startify_session_dir = '~/.vim/sessions'
+" let g:startify_session_dir = '~/.vim/sessions'
 """"" enable 24bit true color
+
 "airline config
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme='nord' "deus
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+
 let g:emmetJsx = 1
 let g:clap_insert_mode_only = 'true'
 let g:EasyMotion_startofline = 0 
 let g:EasyMotion_smartcase = 1
 let g:nord_uniform_diff_background = 1
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let g:ctrlp_extensions = [
 \ 'branches',
 \ ]
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlPMRU'
-let g:hardtime_default_on = 1
-let g:hardtime_ignore_buffer_patterns = [ "coc-explorer", "NERD.*" ]
-let g:hardtime_ignore_quickfix = 1
-let g:hardtime_allow_different_key = 1
+
+" let g:hardtime_default_on = 1
+" let g:hardtime_ignore_buffer_patterns = [ 'coc-explorer', 'NERD.*' ]
+" let g:hardtime_ignore_quickfix = 1
+" let g:hardtime_allow_different_key = 1
+"
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.5 } }
 
 colorscheme nord "night-owl palenight nord onedark candid
@@ -399,15 +405,15 @@ endfunction
 "
 "
 "
-let g:startify_lists = [
-        \ { 'type': 'files',     'header': ['   MRU']            },
-        \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
-        \ { 'type': 'sessions',  'header': ['   Sessions']       },
-        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-        \ { 'type': function('s:gitModified'),  'header': ['   git modified']},
-        \ { 'type': function('s:gitUntracked'), 'header': ['   git untracked']},
-        \ { 'type': 'commands',  'header': ['   Commands']       },
-        \ ]
+" let g:startify_lists = [
+"         \ { 'type': 'files',     'header': ['   MRU']            },
+"         \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+"         \ { 'type': 'sessions',  'header': ['   Sessions']       },
+"         \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+"         \ { 'type': function('s:gitModified'),  'header': ['   git modified']},
+"         \ { 'type': function('s:gitUntracked'), 'header': ['   git untracked']},
+"         \ { 'type': 'commands',  'header': ['   Commands']       },
+"         \ ]
 
 
 
@@ -467,9 +473,6 @@ inoremap <silent><expr> <Tab>
       \ <SID>check_back_space() ? "\<Tab>" :
       \ coc#refresh()
 
-" Map open terminal in root directory
-nmap <silent> <leader>t :silent exec "!gnome-terminal &"<CR>
-"imap <silent> <C-`> <C-O>:silent exec !gnome-terminal"<CR>
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 " Remap for rename current word
@@ -491,15 +494,15 @@ nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
 " Show commands
 nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
 " Search workspace symbols
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+" nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 map <leader>fs :CocCommand eslint.executeAutofix<CR>
 map <silent> <leader>ff :call CocAction('format')<CR>
 map <leader>fa <leader>xs<leader>xf
@@ -507,7 +510,6 @@ map <leader>fa <leader>xs<leader>xf
 map <leader><leader>g :Clap grep<Cr>
 map <leader><leader>f :Clap files<CR>
 map <leader><leader>p :Clap providers<CR>
-imap <C-F> <C-O>:Cp<CR>
 " Buffers delete
 nnoremap <silent> <C-q> :Bdelete menu<CR>
 "easy motion
@@ -527,16 +529,16 @@ nmap <Leader>f <Plug>(easymotion-overwin-f)
 " s{char}{char} to move to {char}{char}
 nmap <Leader>s <Plug>(easymotion-overwin-f2)
 " Move to line
-map <Leader>L <Plug>(easymotion-bd-jk)
-nmap <Leader>L <Plug>(easymotion-overwin-line)
+" map <Leader>L <Plug>(easymotion-bd-jk)
+" nmap <Leader>L <Plug>(easymotion-overwin-line)
 " Move to word
 map  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
 " Gif config
-map <Leader>l <Plug>(easymotion-lineforward)
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-map <Leader>h <Plug>(easymotion-linebackward)
+" map <Leader>l <Plug>(easymotion-lineforward)
+" map <Leader>j <Plug>(easymotion-j)
+" map <Leader>k <Plug>(easymotion-k)
+" map <Leader>h <Plug>(easymotion-linebackward)
 " Remapping for windows movements
 nnoremap <leader>h :wincmd h<CR>
 nnoremap <leader>j :wincmd j<CR>
@@ -616,8 +618,8 @@ augroup mygroup
  \   endif
 
 autocmd CursorMoved,BufEnter *
-\   if &filetype == "coc-explorer" |
-\     execute "norm 0" |
+\   if &filetype == 'coc-explorer' |
+\     execute 'norm 0' |
 \   endif
 
 
@@ -625,15 +627,15 @@ autocmd CursorMoved,BufEnter *
 
   autocmd CmdLineEnter : let g:prev_hls = &hlsearch
   autocmd CmdLineChanged : let g:cmd = getcmdline() |
-\  if g:cmd =~# "^%\\?S.*/" |
+\  if g:cmd =~# '^%\\?S.*/' |
 \    let g:splitcmd = split(g:cmd, '/') |
 \    let g:search_pat = len(g:splitcmd) >= 2 ? substitute(join(g:splitcmd[0:1], '/'), '^%', '', '') : '' |
 \    if !empty(g:search_pat) |
 \      try |
-\        silent exec "norm \<Cmd>set hls|0verbose " . g:search_pat . "/\<CR>" |
+\        silent exec 'norm \<Cmd>set hls|0verbose ' . g:search_pat . '/\<CR>' |
 \        catch /^Vim\%((\a\+)\)\=:E/ |
 \      endtry |
-\      silent exec "norm N" |
+\      silent exec 'norm N' |
 \      redraw! |
 \    endif |
 \  endif

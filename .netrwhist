@@ -1,12 +1,12 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =6
+let g:netrw_dirhistcnt =0
+let g:netrw_dirhist_0='/Users/nazar/Projects/bvb/iris/resources/react/components/shared/FormControls/SearchSelect'
+let g:netrw_dirhist_9='/Users/nazar/Projects/bvb/iris/resources/react/components/shared/FormControls/Select'
+let g:netrw_dirhist_8='/Users/nazar/Projects/bvb/iris/resources/react/containers/helpdesk/components/FileIcon'
+let g:netrw_dirhist_7='/Users/nazar/Projects/bvb/Optima/src/components/Buttons/GoogleButton'
 let g:netrw_dirhist_6='/Users/mac/Desktop/Projects/twitter-search'
 let g:netrw_dirhist_5='/Users/mac/Desktop/Projects/testApp'
 let g:netrw_dirhist_4='/Users/mac'
 let g:netrw_dirhist_3='/Users/mac/Desktop/Projects/voronychlabs'
 let g:netrw_dirhist_2='/Users/mac/Desktop/Projects/twitter-search/client/src'
 let g:netrw_dirhist_1='/Users/mac/Desktop/Projects/twitter-search/client'
-let g:netrw_dirhist_0='/Users/mac/Desktop/Projects/twitter-search'
-let g:netrw_dirhist_9='/Users/mac/Desktop/Projects/voronychlabs'
-let g:netrw_dirhist_8='/Users/mac/.config/nvim'
-let g:netrw_dirhist_7='/Users/mac/.config'
