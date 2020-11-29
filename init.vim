@@ -2,37 +2,35 @@
 
 call plug#begin('~/.vim/plugged')
     Plug 'espizo/vim-gitcommit-issue-id'
-    " Auto-completion for quotes, parens, brackets
-    " Plug 'Raimondi/delimitMate'
-    " Enable repeating supported plugin maps with '.'
+    "" Enable repeating supported plugin maps with '.'
     Plug 'tpope/vim-repeat'
-    " Repeat command extended to visual mode.
+    "" Repeat command extended to visual mode.
     Plug 'inkarkat/vim-visualrepeat'
-    " Brings physics-based smooth scrolling
+    "" Brings physics-based smooth scrolling
     Plug 'yuttie/comfortable-motion.vim'
-    " A dark colorscheme with vibrant colors
+    "" A dark colorscheme with vibrant colors
     Plug 'flrnprz/candid.vim'
-    "Plug 'mileszs/ack.vim'
-    "A Git wrapper
+    ""Plug 'mileszs/ack.vim'
+    ""A Git wrapper
     Plug 'tpope/vim-fugitive'
-    " Fake data generator
+    "" Fake data generator
     Plug 'tkhren/vim-fake'
-    " Buffers close menu
+    "" Buffers close menu
     Plug 'Asheq/close-buffers.vim'
-    " React code snippets
-    " Plug 'epilande/vim-react-snippets'
-    " Switch between single-line and multiline forms of code gS - spit / gJ - join
+    "" React code snippets
+    Plug 'epilande/vim-react-snippets'
+    "" Switch between single-line and multiline forms of code gS - spit / gJ - join
     Plug 'AndrewRadev/splitjoin.vim'
-    " Plug 'junegunn/fzf' , { 'do': { -> fzf#install() } }
-    " Plug 'junegunn/fzf.vim'
+    "" Plug 'junegunn/fzf' , { 'do': { -> fzf#install() } }
+    "" Plug 'junegunn/fzf.vim'
     " Include source for coc.nvim
     Plug 'Shougo/neoinclude.vim'
-    " Include source for coc.nvim
+    " " Include source for coc.nvim
     Plug 'jsfaint/coc-neoinclude'
     Plug 'neoclide/coc.nvim',   {'branch': 'release'}
     " Color scheme
     Plug 'haishanh/night-owl.vim'
-    " Screenshot maker
+    " " Screenshot maker
     Plug 'kristijanhusak/vim-carbon-now-sh'
     " A lightweight and powerful git branch viewer for vim.
     " Plug 'rbong/vim-flog'
@@ -40,9 +38,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'sheerun/vim-polyglot'
     " Fuzzy file, buffer, mru, tag, etc finder
     Plug 'ctrlpvim/ctrlp.vim'
-    " Lean & mean status/tabline for vim that's light as air
+    " " Lean & mean status/tabline for vim that's light as air
     Plug 'bling/vim-airline'
-    " Themes for airline
+    " " Themes for airline
     Plug 'vim-airline/vim-airline-themes'
     " Snippets support
     Plug 'Shougo/neosnippet.vim'
@@ -50,17 +48,17 @@ call plug#begin('~/.vim/plugged')
     Plug 'Shougo/neosnippet-snippets'
     " Print documents in echo area.
     Plug 'Shougo/echodoc.vim'
-    " Extended session management for Vim
+    " " Extended session management for Vim
     Plug 'xolox/vim-session'
-    " Session
-    " Required for vim-session
+    " " Session
+    " " Required for vim-session
     Plug 'xolox/vim-misc'
     " File extensions icons
     Plug 'ryanoasis/vim-devicons'
     " (Do)cumentation (Ge)nerator 15+ languages  Generate proper code documentation skeletons with a single keypress.
     Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
     " Vim bundle for styled-components based javascript files.
-    " Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+    Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
     " A Vim plugin that provides GraphQL file detection, syntax highlighting, and indentation.
     Plug 'jparise/vim-graphql'
     " Modern performant generic finder and dispatcher for Vim and NeoVim
@@ -86,21 +84,21 @@ call plug#begin('~/.vim/plugged')
     " Vim motions on speed!
     Plug 'easymotion/vim-easymotion'
     " Have Vim automatically reload a file that has changed externally
-    " Plug 'djoshea/vim-autoread'
+    Plug 'djoshea/vim-autoread'
     " Plugin manager for coc
     Plug 'theoldmoon0602/coc-plug'
     " Color scheme
     Plug 'joshdick/onedark.vim'
     " Motions to and inside git conflict markers
-    Plug 'rhysd/conflict-marker.vim'
+    " Plug 'rhysd/conflict-marker.vim'
     " Vim plugin to automate replacing expressions with assigned variables in any programming language
-    Plug 'da-x/name-assign.vim'
-    " VimL competition
-    Plug 'Shougo/neco-vim'
-    Plug 'neoclide/coc-neco'
-    " Plugin that adds a 'cut' operation separate from 'delete'
+    " Plug 'da-x/name-assign.vim'
+    " " VimL competition
+    " Plug 'Shougo/neco-vim'
+    " Plug 'neoclide/coc-neco'
+    " " Plugin that adds a 'cut' operation separate from 'delete'
     Plug 'svermeulen/vim-cutlass'
-    " Vim plugin that provides additional text objects
+    " " Vim plugin that provides additional text objects
     Plug 'wellle/targets.vim'
     " Color scheme
     Plug 'arcticicestudio/nord-vim'
@@ -126,7 +124,7 @@ call plug#end()
     CocPlug 'coc-spell-checker'
     CocPlug 'coc-snippets'
     CocPlug 'coc-prettier'
-    CocPlug 'coc-neosnippet'
+    " CocPlug 'coc-neosnippet'
     CocPlug 'coc-marketplace'
     CocPlug 'coc-lists'
     CocPlug 'coc-jest'
@@ -160,7 +158,7 @@ call coc_plug#end()
 " ===================  Stuff that should be before let and set =======================
 "
 "
-"
+""
 
 
 function! s:project_name()
@@ -173,14 +171,14 @@ endfunction
 
 
 
-" setted color for quick scope plugin
-augroup qs_colors
-  autocmd!
-  autocmd ColorScheme * highlight QuickScopePrimary guibg='#434C5E' gui=underline cterm=underline
-  autocmd ColorScheme * highlight QuickScopeSecondary  gui=underline cterm=underline
-augroup END
+"" setted color for quick scope plugin
+"augroup qs_colors
+"  autocmd!
+"  autocmd ColorScheme * highlight QuickScopePrimary guibg='#434C5E' gui=underline cterm=underline
+"  autocmd ColorScheme * highlight QuickScopeSecondary  gui=underline cterm=underline
+"augroup END
 
-"
+""
 "
 "
 " ===================  Let =======================
@@ -214,7 +212,7 @@ let g:session_autoload = 'no'
 let g:session_autosave = 'yes'
 let g:session_autosave_to = fnameescape(s:project_name()) 
 " let g:session_autosave_to = 'default'
-" let g:session_verbose_messages = 0
+let g:session_verbose_messages = 0
 "DoGE settings
 let g:doge_mapping = '<leader><leader>d'
 " echodoc configs
@@ -229,6 +227,11 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme='nord' "deus
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
 
 let g:emmetJsx = 1
 let g:clap_insert_mode_only = 'true'
@@ -339,7 +342,7 @@ endif
 "
 "
 "
-"
+""
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -354,32 +357,32 @@ function! s:show_documentation()
   endif
 endfunction
 
-" Remap for do codeAction of selected region
-function! s:cocActionsOpenFromSelected(type) abort
-  execute 'CocCommand actions.open ' . a:type
-endfunction
+"" Remap for do codeAction of selected region
+"function! s:cocActionsOpenFromSelected(type) abort
+"  execute 'CocCommand actions.open ' . a:type
+"endfunction
 
-function! RipgrepFzf(query, fullscreen)
-  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
-  let initial_command = printf(command_fmt, shellescape(a:query))
-  let reload_command = printf(command_fmt, '{q}')
-  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command, '--preview', '~/.vim/plugged/fzf.vim/bin/preview.sh {}']}
-  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
-endfunction
+"function! RipgrepFzf(query, fullscreen)
+"  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
+"  let initial_command = printf(command_fmt, shellescape(a:query))
+"  let reload_command = printf(command_fmt, '{q}')
+"  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command, '--preview', '~/.vim/plugged/fzf.vim/bin/preview.sh {}']}
+"  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+"endfunction
 
-function! s:config_easyfuzzymotion(...) abort
-  return extend(copy({
-  \   'converters': [incsearch#config#fuzzyword#converter()],
-  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-  \   'keymap': {"\<CR>": '<Over>(easymotion)'},
-  \   'is_expr': 0,
-  \   'is_stay': 1
-  \ }), get(a:, 1, {}))
-endfunction
+"function! s:config_easyfuzzymotion(...) abort
+"  return extend(copy({
+"  \   'converters': [incsearch#config#fuzzyword#converter()],
+"  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+"  \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+"  \   'is_expr': 0,
+"  \   'is_stay': 1
+"  \ }), get(a:, 1, {}))
+"endfunction
 
-" returns all modified files of the current git repo
-" `2>/dev/null` makes the command fail quietly, so that when we are not
-" in a git repo, the list will be empty
+"" returns all modified files of the current git repo
+"" `2>/dev/null` makes the command fail quietly, so that when we are not
+"" in a git repo, the list will be empty
 function! s:gitModified()
     let files = systemlist('git ls-files -m 2>/dev/null')
     return map(files, "{'line': v:val, 'path': v:val}")
@@ -390,8 +393,6 @@ function! s:gitUntracked()
     let files = systemlist('git ls-files -o --exclude-standard 2>/dev/null')
     return map(files, "{'line': v:val, 'path': v:val}")
 endfunction
-
-
 
 
 "
@@ -585,62 +586,63 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 "
 "
 "
-"
+""
 augroup mygroup
 
- au GUIEnter * simalt ~x
-  au BufNewFile,BufRead *.ejs set filetype=html
 
-  autocmd CursorHold * silent syntax sync fromstart
+" au GUIEnter * simalt ~x
+"  au BufNewFile,BufRead *.ejs set filetype=html
 
-  " Highlight symbol under cursor on CursorHold
-  autocmd CursorHold * silent call CocActionAsync('highlight')
+"  autocmd CursorHold * silent syntax sync fromstart
 
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+"  " Highlight symbol under cursor on CursorHold
+"  autocmd CursorHold * silent call CocActionAsync('highlight')
 
- autocmd FileType apache setlocal commentstring=#\ %s
+"  autocmd!
+"  " Setup formatexpr specified filetype(s).
+"  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+"  " Update signature help on jump placeholder
+"  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 
-
-
- autocmd CursorMoved,CursorMovedI,BufEnter *
- \   if exists('*IsStyledDefinition') |
- \     if IsStyledDefinition(line('.')) && g:emmetJsx |
- \       call coc#config('emmet.includeLanguages', { 'javascript': 'css' } ) |
- \       let g:emmetJsx = 0 |
- \     elseif !IsStyledDefinition(line('.')) && !g:emmetJsx |
- \       call coc#config('emmet.includeLanguages', { 'javascript': 'javascriptreact' } ) |
- \       let g:emmetJsx = 1 |
- \     endif |
- \   endif
-
-autocmd CursorMoved,BufEnter *
-\   if &filetype == 'coc-explorer' |
-\     execute 'norm 0' |
-\   endif
+" autocmd FileType apache setlocal commentstring=#\ %s
 
 
 
+" autocmd CursorMoved,CursorMovedI,BufEnter *
+" \   if exists('*IsStyledDefinition') |
+" \     if IsStyledDefinition(line('.')) && g:emmetJsx |
+" \       call coc#config('emmet.includeLanguages', { 'javascript': 'css' } ) |
+" \       let g:emmetJsx = 0 |
+" \     elseif !IsStyledDefinition(line('.')) && !g:emmetJsx |
+" \       call coc#config('emmet.includeLanguages', { 'javascript': 'javascriptreact' } ) |
+" \       let g:emmetJsx = 1 |
+" \     endif |
+" \   endif
 
-  autocmd CmdLineEnter : let g:prev_hls = &hlsearch
-  autocmd CmdLineChanged : let g:cmd = getcmdline() |
-\  if g:cmd =~# '^%\\?S.*/' |
-\    let g:splitcmd = split(g:cmd, '/') |
-\    let g:search_pat = len(g:splitcmd) >= 2 ? substitute(join(g:splitcmd[0:1], '/'), '^%', '', '') : '' |
-\    if !empty(g:search_pat) |
-\      try |
-\        silent exec 'norm \<Cmd>set hls|0verbose ' . g:search_pat . '/\<CR>' |
-\        catch /^Vim\%((\a\+)\)\=:E/ |
-\      endtry |
-\      silent exec 'norm N' |
-\      redraw! |
-\    endif |
-\  endif
-  autocmd CmdLineLeave : let &hlsearch = g:prev_hls
-" au BufWritePost * nested checktime %
+"autocmd CursorMoved,BufEnter *
+"\   if &filetype == 'coc-explorer' |
+"\     execute 'norm 0' |
+"\   endif
+
+
+
+
+"  autocmd CmdLineEnter : let g:prev_hls = &hlsearch
+"  autocmd CmdLineChanged : let g:cmd = getcmdline() |
+"\  if g:cmd =~# '^%\\?S.*/' |
+"\    let g:splitcmd = split(g:cmd, '/') |
+"\    let g:search_pat = len(g:splitcmd) >= 2 ? substitute(join(g:splitcmd[0:1], '/'), '^%', '', '') : '' |
+"\    if !empty(g:search_pat) |
+"\      try |
+"\        silent exec 'norm \<Cmd>set hls|0verbose ' . g:search_pat . '/\<CR>' |
+"\        catch /^Vim\%((\a\+)\)\=:E/ |
+"\      endtry |
+"\      silent exec 'norm N' |
+"\      redraw! |
+"\    endif |
+"\  endif
+"  autocmd CmdLineLeave : let &hlsearch = g:prev_hls
+"" au BufWritePost * nested checktime %
 
 
 augroup end
@@ -690,38 +692,38 @@ command! -nargs=* -bang Rg call RipgrepFzf(<q-args>, <bang>0)
 
 " Fake
 
-"" Choose a random element from a list
-call fake#define('sex', 'fake#choice(["male", "female"])')
+" '' Choose a random element from a list
+" call fake#define('sex', 'fake#choice(['male', 'female'])')
 
-"" Get a name of male or female
-"" fake#int(1) returns 0 or 1
-call fake#define('name', 'fake#int(1) ? fake#gen("male_name")'
-                                  \ . ' : fake#gen("female_name")')
+" '' Get a name of male or female
+" '' fake#int(1) returns 0 or 1
+" call fake#define('name', 'fake#int(1) ? fake#gen("male_name")'
+"                                   \ . ' : fake#gen("female_name")')
 
-"" Get a full name
-call fake#define('fullname', 'fake#gen("name") . " " . fake#gen("surname")')
+" '' Get a full name
+" call fake#define('fullname', 'fake#gen("name") . ' ' . fake#gen("surname")')
 
-"" Get a nonsense text like Lorem ipsum
-call fake#define('sentense', 'fake#capitalize('
-                        \ . 'join(map(range(fake#int(3,15)),"fake#gen(\"nonsense\")"))'
-                        \ . ' . fake#chars(1,"..............!?"))')
+" '' Get a nonsense text like Lorem ipsum
+" call fake#define('sentense', 'fake#capitalize('
+"                         \ . 'join(map(range(fake#int(3,15)),"fake#gen(\"nonsense\")"))'
+"                         \ . ' . fake#chars(1,"..............!?"))')
 
-call fake#define('paragraph', 'join(map(range(fake#int(3,10)),"fake#gen(\"sentense\")"))')
+" call fake#define('paragraph', 'join(map(range(fake#int(3,10)),"fake#gen(\"sentense\")"))')
 
-"" Alias
-call fake#define('lipsum', 'fake#gen("paragraph")')
+" '' Alias
+" call fake#define('lipsum', 'fake#gen("paragraph")')
 
-"" Get an age weighted by generation distribution
-call fake#define('age', 'float2nr(floor(110 * fake#betapdf(1.0, 1.45)))')
+" '' Get an age weighted by generation distribution
+" call fake#define('age', 'float2nr(floor(110 * fake#betapdf(1.0, 1.45)))')
 
-"" Get a domain (ordered by number of websites)
-call fake#define('gtld', 'fake#get(fake#load("gtld"),'
-                        \ . 'fake#betapdf(0.2, 3.0))')
+" '' Get a domain (ordered by number of websites)
+" call fake#define('gtld', 'fake#get(fake#load("gtld"),'
+"                         \ . 'fake#betapdf(0.2, 3.0))')
 
-call fake#define('email', 'tolower(substitute(printf("%s@%s.%s",'
-                        \ . 'fake#gen("name"),'
-                        \ . 'fake#gen("surname"),'
-                        \ . 'fake#gen("gtld")), "\\s", "-", "g"))')
+" call fake#define('email', 'tolower(substitute(printf("%s@%s.%s",'
+"                         \ . 'fake#gen("name"),'
+"                         \ . 'fake#gen("surname"),'
+"                         \ . 'fake#gen("gtld")), '\\s', '-', 'g'))')
 
 
 

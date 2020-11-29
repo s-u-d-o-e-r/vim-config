@@ -10,13 +10,14 @@
 		"vim",
 		"scss"
 	],
+	"yank.enableCompletion": false,
 	"coc.preferences.extensionUpdateCheck": "daily",
 	"java.enabled": false,
 	"emmet.includeLanguages": { "javascript": "javascriptreact" },
 	"emmet.optimizeStylesheetParsing": true,
 	"git.enableGutters": true,
 	"git.addGBlameToVirtualText": true,
-	"diagnostic.virtualText": true,
+	"diagnostic.virtualText": false,
 	"codeLens.enable": true,
 	"diagnostic-languageserver.filetypes": {
 		"vim": "vint",
@@ -57,9 +58,7 @@
 		"enable": true
 	},
 	"explorer.icon.enableNerdfont": true,
-	"explorer.keyMappings": {
-		"i": false
-	},
+	"explorer.icon.enableVimDevicons": true,
 	"cSpell.userWords": [
 		"Chargebacks",
 		"TSYS",
@@ -73,6 +72,7 @@
 		"helpdesk",
 		"pacman",
 		"reseted",
+		"setted",
 		"uploader"
 	],
 	"prettier.trailingComma": "none",
@@ -111,5 +111,32 @@
 				"version": "16.8"
 			}
 		}
+	},
+	"suggest.completionItemKindLabels": {
+		"function": "\uf794",
+		"method": "\uf6a6",
+		"variable": "\uf71b",
+		"constant": "\uf8ff",
+		"struct": "\ufb44",
+		"class": "\uf0e8",
+		"interface": "\ufa52",
+		"text": "\ue612",
+		"enum": "\uf435",
+		"enumMember": "\uf02b",
+		"module": "\uf668",
+		"color": "\ue22b",
+		"property": "\ufab6",
+		"field": "\uf93d",
+		"unit": "\uf475",
+		"file": "\uf471",
+		"value": "\uf8a3",
+		"event": "\ufacd",
+		"folder": "\uf115",
+		"keyword": "\uf893",
+		"snippet": "\uf64d",
+		"operator": "\uf915",
+		"reference": "\uf87a",
+		"typeParameter": "\uf278",
+		"default": "\uf29c"
 	}
 }
