@@ -58,7 +58,6 @@
 		"enable": true
 	},
 	"explorer.icon.enableNerdfont": true,
-	"explorer.icon.enableVimDevicons": true,
 	"cSpell.userWords": [
 		"Chargebacks",
 		"TSYS",
