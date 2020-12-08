@@ -50,7 +50,7 @@
 	"prettier.eslintIntegration": true,
 	"suggest.noselect": false,
 	"suggest.autoTrigger": "always",
-	"suggest.timeout": 500,
+	"coc.preferences.timeout": 1000,
 	"suggest.acceptSuggestionOnCommitCharacter": true,
 	"suggest.echodocSupport": true,
 	"eslint.autoFixOnSave": false,

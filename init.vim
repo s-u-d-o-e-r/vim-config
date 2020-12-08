@@ -1,4 +1,4 @@
-" let g:polyglot_disabled = ['css', 'javascript', 'typescript', 'javascriptreact']
+let g:polyglot_disabled = ['css', 'javascript', 'typescript', 'javascriptreact']
 
 call plug#begin('~/.vim/plugged')
     Plug 'espizo/vim-gitcommit-issue-id'
@@ -64,7 +64,7 @@ call plug#begin('~/.vim/plugged')
     " Modern performant generic finder and dispatcher for Vim and NeoVim
     Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
     " Color scheme
-    Plug 'drewtempelmeyer/palenight.vim'
+    " Plug 'drewtempelmeyer/palenight.vim'
     " The undo history visualizer for VIM
     Plug 'mbbill/undotree'
     " Commentary.vim: comment stuff out 
@@ -101,7 +101,7 @@ call plug#begin('~/.vim/plugged')
     " " Vim plugin that provides additional text objects
     Plug 'wellle/targets.vim'
     " Color scheme
-    Plug 'arcticicestudio/nord-vim'
+    " Plug 'arcticicestudio/nord-vim'
     "Git branch search using ctrlp.vim.
     Plug 'imkmf/ctrlp-branches'
     "emmet-vim is a vim plug-in which provides support for expanding abbreviations similar to emmet.
@@ -113,9 +113,10 @@ call plug#begin('~/.vim/plugged')
     "Hardtime helps you break that annoying habit vimmers have of scrolling up and down the page using jjjjj and kkkkk but without compromising the rest of our vim experience.
     " Plug 'takac/vim-hardtime'
     "Treesitter configurations and abstraction layer for Neovim.
-    " Plug 'nvim-treesitter/nvim-treesitter'
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
     "Blazing fast minimap for vim, powered by 🛰 code-minimap written in Rust
     " Plug 'wfxr/minimap.vim'
+    Plug 'christianchiarulli/nvcode-color-schemes.vim'
 call plug#end()
 
  call coc_plug#begin()
@@ -755,12 +756,12 @@ hi link EasyMotionIncSearch Search
 " { 'javascript', 'typescript', 'html', 'json', 'css', 'php' } ,  
 
 
-" lua <<EOF
-" require'nvim-treesitter.configs'.setup {
-"   ensure_installed ="all",
-"   highlight = {
-"     enable = true,                
-"   },
-" }
-" EOF
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed ="all",
+  highlight = {
+    enable = true,                
+  },
+}
+EOF
 
