@@ -21,8 +21,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'epilande/vim-react-snippets'
     "" Switch between single-line and multiline forms of code gS - spit / gJ - join
     Plug 'AndrewRadev/splitjoin.vim'
-    "" Plug 'junegunn/fzf' , { 'do': { -> fzf#install() } }
-    "" Plug 'junegunn/fzf.vim'
+    Plug 'junegunn/fzf' , { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
     " Include source for coc.nvim
     Plug 'Shougo/neoinclude.vim'
     " " Include source for coc.nvim
@@ -90,9 +90,9 @@ call plug#begin('~/.vim/plugged')
     " Color scheme
     Plug 'joshdick/onedark.vim'
     " Motions to and inside git conflict markers
-    " Plug 'rhysd/conflict-marker.vim'
+    Plug 'rhysd/conflict-marker.vim'
     " Vim plugin to automate replacing expressions with assigned variables in any programming language
-    " Plug 'da-x/name-assign.vim'
+    Plug 'da-x/name-assign.vim'
     " " VimL competition
     " Plug 'Shougo/neco-vim'
     " Plug 'neoclide/coc-neco'
@@ -105,18 +105,20 @@ call plug#begin('~/.vim/plugged')
     "Git branch search using ctrlp.vim.
     Plug 'imkmf/ctrlp-branches'
     "emmet-vim is a vim plug-in which provides support for expanding abbreviations similar to emmet.
-    " Plug 'mattn/emmet-vim'
+    Plug 'mattn/emmet-vim'
     "An always-on highlight for a unique character in every word on a line to help you use f, F and family.
     Plug 'unblevable/quick-scope'
     "sandwich.vim is a set of operator and textobject plugins to add/delete/replace surroundings of a sandwiched textobject, like (foo), 'bar'.
     Plug 'machakann/vim-sandwich'
     "Hardtime helps you break that annoying habit vimmers have of scrolling up and down the page using jjjjj and kkkkk but without compromising the rest of our vim experience.
-    " Plug 'takac/vim-hardtime'
+    Plug 'takac/vim-hardtime'
     "Treesitter configurations and abstraction layer for Neovim.
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
     "Blazing fast minimap for vim, powered by 🛰 code-minimap written in Rust
     " Plug 'wfxr/minimap.vim'
     Plug 'christianchiarulli/nvcode-color-schemes.vim'
+    "EditorConfig plugin for Vim
+    Plug 'editorconfig/editorconfig-vim'
 call plug#end()
 
  call coc_plug#begin()
@@ -125,7 +127,7 @@ call plug#end()
     CocPlug 'coc-spell-checker'
     CocPlug 'coc-snippets'
     CocPlug 'coc-prettier'
-    " CocPlug 'coc-neosnippet'
+    CocPlug 'coc-neosnippet'
     CocPlug 'coc-marketplace'
     CocPlug 'coc-lists'
     CocPlug 'coc-jest'
@@ -172,12 +174,12 @@ endfunction
 
 
 
-"" setted color for quick scope plugin
-"augroup qs_colors
-"  autocmd!
-"  autocmd ColorScheme * highlight QuickScopePrimary guibg='#434C5E' gui=underline cterm=underline
-"  autocmd ColorScheme * highlight QuickScopeSecondary  gui=underline cterm=underline
-"augroup END
+" setted color for quick scope plugin
+augroup qs_colors
+ autocmd!
+  autocmd ColorScheme * highlight QuickScopePrimary guibg='#434C5E' gui=underline cterm=underline
+  autocmd ColorScheme * highlight QuickScopeSecondary  gui=underline cterm=underline
+augroup END
 
 ""
 "
@@ -248,11 +250,11 @@ let g:ctrlp_extensions = [
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlPMRU'
 
-" let g:hardtime_default_on = 1
-" let g:hardtime_ignore_buffer_patterns = [ 'coc-explorer', 'NERD.*' ]
-" let g:hardtime_ignore_quickfix = 1
-" let g:hardtime_allow_different_key = 1
-"
+ let g:hardtime_default_on = 1
+ let g:hardtime_ignore_buffer_patterns = [ 'coc-explorer', 'NERD.*' ]
+ let g:hardtime_ignore_quickfix = 1
+ let g:hardtime_allow_different_key = 1
+
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.5 } }
 
 colorscheme nord "night-owl palenight nord onedark candid
@@ -359,27 +361,27 @@ function! s:show_documentation()
 endfunction
 
 "" Remap for do codeAction of selected region
-"function! s:cocActionsOpenFromSelected(type) abort
-"  execute 'CocCommand actions.open ' . a:type
-"endfunction
+function! s:cocActionsOpenFromSelected(type) abort
+  execute 'CocCommand actions.open ' . a:type
+endfunction
 
-"function! RipgrepFzf(query, fullscreen)
-"  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
-"  let initial_command = printf(command_fmt, shellescape(a:query))
-"  let reload_command = printf(command_fmt, '{q}')
-"  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command, '--preview', '~/.vim/plugged/fzf.vim/bin/preview.sh {}']}
-"  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
-"endfunction
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command, '--preview', '~/.vim/plugged/fzf.vim/bin/preview.sh {}']}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
 
-"function! s:config_easyfuzzymotion(...) abort
-"  return extend(copy({
-"  \   'converters': [incsearch#config#fuzzyword#converter()],
-"  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-"  \   'keymap': {"\<CR>": '<Over>(easymotion)'},
-"  \   'is_expr': 0,
-"  \   'is_stay': 1
-"  \ }), get(a:, 1, {}))
-"endfunction
+function! s:config_easyfuzzymotion(...) abort
+  return extend(copy({
+  \   'converters': [incsearch#config#fuzzyword#converter()],
+  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+  \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+  \   'is_expr': 0,
+  \   'is_stay': 1
+  \ }), get(a:, 1, {}))
+endfunction
 
 "" returns all modified files of the current git repo
 "" `2>/dev/null` makes the command fail quietly, so that when we are not
@@ -432,10 +434,19 @@ endfunction
 "
 "
 
+
+nnoremap  <C-J>  :m .+1<CR>==
+nnoremap  <C-K> :m .-2<CR>==
+inoremap  <C-J> <Esc>:m .+1<CR>==gi
+inoremap  <C-K> <Esc>:m .-2<CR>==gi
+vnoremap  <C-J> :m '>+1<CR>gv=gv
+vnoremap  <C-K> :m '<-2<CR>gv=gv
+
+vmap <leader>b <Plug>NameAssign
 " mapping for buffers control
 nmap <S-H> :bprev<CR>
 nmap <S-L> :bnext<CR>
-map <leader><leader>s :Startify<CR>
+" map <leader><leader>s :Startify<CR>
 vnoremap <F3> :CarbonNowSh<CR>
 nnoremap <F5> :UndotreeToggle<cr>
 " save mappings
@@ -485,7 +496,7 @@ nmap <leader>f  <Plug>(coc-format-selected)
 xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
 nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
 " Remap for do codeAction of current line
-nmap <silent> <leader>ac  :<C-u> CocCommand actions.open<cr>
+nmap <silent> <leader>ac  :<C-u> CocAction<cr>
 " Fix autofix problem of current line
 nmap <leader>qf  <Plug>(coc-fix-current)
 " Using CocList
@@ -591,59 +602,59 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 augroup mygroup
 
 
-" au GUIEnter * simalt ~x
-"  au BufNewFile,BufRead *.ejs set filetype=html
+ au GUIEnter * simalt ~x
+ au BufNewFile,BufRead *.ejs set filetype=html
 
-"  autocmd CursorHold * silent syntax sync fromstart
+ autocmd CursorHold * silent syntax sync fromstart
 
-"  " Highlight symbol under cursor on CursorHold
-"  autocmd CursorHold * silent call CocActionAsync('highlight')
+ " Highlight symbol under cursor on CursorHold
+ autocmd CursorHold * silent call CocActionAsync('highlight')
 
-"  autocmd!
-"  " Setup formatexpr specified filetype(s).
-"  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-"  " Update signature help on jump placeholder
-"  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+ autocmd!
+ " Setup formatexpr specified filetype(s).
+ autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+ " Update signature help on jump placeholder
+ autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 
-" autocmd FileType apache setlocal commentstring=#\ %s
-
-
-
-" autocmd CursorMoved,CursorMovedI,BufEnter *
-" \   if exists('*IsStyledDefinition') |
-" \     if IsStyledDefinition(line('.')) && g:emmetJsx |
-" \       call coc#config('emmet.includeLanguages', { 'javascript': 'css' } ) |
-" \       let g:emmetJsx = 0 |
-" \     elseif !IsStyledDefinition(line('.')) && !g:emmetJsx |
-" \       call coc#config('emmet.includeLanguages', { 'javascript': 'javascriptreact' } ) |
-" \       let g:emmetJsx = 1 |
-" \     endif |
-" \   endif
-
-"autocmd CursorMoved,BufEnter *
-"\   if &filetype == 'coc-explorer' |
-"\     execute 'norm 0' |
-"\   endif
+autocmd FileType apache setlocal commentstring=#\ %s
 
 
 
+autocmd CursorMoved,CursorMovedI,BufEnter *
+\   if exists('*IsStyledDefinition') |
+\     if IsStyledDefinition(line('.')) && g:emmetJsx |
+\       call coc#config('emmet.includeLanguages', { 'javascript': 'css' } ) |
+\       let g:emmetJsx = 0 |
+\     elseif !IsStyledDefinition(line('.')) && !g:emmetJsx |
+\       call coc#config('emmet.includeLanguages', { 'javascript': 'javascriptreact' } ) |
+\       let g:emmetJsx = 1 |
+\     endif |
+\   endif
 
-"  autocmd CmdLineEnter : let g:prev_hls = &hlsearch
-"  autocmd CmdLineChanged : let g:cmd = getcmdline() |
-"\  if g:cmd =~# '^%\\?S.*/' |
-"\    let g:splitcmd = split(g:cmd, '/') |
-"\    let g:search_pat = len(g:splitcmd) >= 2 ? substitute(join(g:splitcmd[0:1], '/'), '^%', '', '') : '' |
-"\    if !empty(g:search_pat) |
-"\      try |
-"\        silent exec 'norm \<Cmd>set hls|0verbose ' . g:search_pat . '/\<CR>' |
-"\        catch /^Vim\%((\a\+)\)\=:E/ |
-"\      endtry |
-"\      silent exec 'norm N' |
-"\      redraw! |
-"\    endif |
-"\  endif
-"  autocmd CmdLineLeave : let &hlsearch = g:prev_hls
-"" au BufWritePost * nested checktime %
+autocmd CursorMoved,BufEnter *
+\   if &filetype == 'coc-explorer' |
+\     execute 'norm 0' |
+\   endif
+
+
+
+
+  autocmd CmdLineEnter : let g:prev_hls = &hlsearch
+  autocmd CmdLineChanged : let g:cmd = getcmdline() |
+\  if g:cmd =~# '^%\\?S.*/' |
+\    let g:splitcmd = split(g:cmd, '/') |
+\    let g:search_pat = len(g:splitcmd) >= 2 ? substitute(join(g:splitcmd[0:1], '/'), '^%', '', '') : '' |
+\    if !empty(g:search_pat) |
+\      try |
+\        silent exec 'norm \<Cmd>set hls|0verbose ' . g:search_pat . '/\<CR>' |
+\        catch /^Vim\%((\a\+)\)\=:E/ |
+\      endtry |
+\      silent exec 'norm N' |
+\      redraw! |
+\    endif |
+\  endif
+  autocmd CmdLineLeave : let &hlsearch = g:prev_hls
+" au BufWritePost * nested checktime %
 
 
 augroup end
@@ -693,38 +704,38 @@ command! -nargs=* -bang Rg call RipgrepFzf(<q-args>, <bang>0)
 
 " Fake
 
-" '' Choose a random element from a list
-" call fake#define('sex', 'fake#choice(['male', 'female'])')
+" Choose a random element from a list
+call fake#define('sex', 'fake#choice(["male", "female"])')
 
-" '' Get a name of male or female
-" '' fake#int(1) returns 0 or 1
-" call fake#define('name', 'fake#int(1) ? fake#gen("male_name")'
-"                                   \ . ' : fake#gen("female_name")')
+" Get a name of male or female
+" fake#int(1) returns 0 or 1
+call fake#define('name', 'fake#int(1) ? fake#gen("male_name")'
+                                  \ . ' : fake#gen("female_name")')
 
-" '' Get a full name
-" call fake#define('fullname', 'fake#gen("name") . ' ' . fake#gen("surname")')
+" Get a full name
+call fake#define('fullname', 'fake#gen("name") . " " . fake#gen("surname")')
 
-" '' Get a nonsense text like Lorem ipsum
-" call fake#define('sentense', 'fake#capitalize('
-"                         \ . 'join(map(range(fake#int(3,15)),"fake#gen(\"nonsense\")"))'
-"                         \ . ' . fake#chars(1,"..............!?"))')
+" Get a nonsense text like Lorem ipsum
+call fake#define('sentense', 'fake#capitalize('
+                        \ . 'join(map(range(fake#int(3,15)),"fake#gen(\"nonsense\")"))'
+                        \ . ' . fake#chars(1,"..............!?"))')
 
-" call fake#define('paragraph', 'join(map(range(fake#int(3,10)),"fake#gen(\"sentense\")"))')
+call fake#define('paragraph', 'join(map(range(fake#int(3,10)),"fake#gen(\"sentense\")"))')
 
-" '' Alias
-" call fake#define('lipsum', 'fake#gen("paragraph")')
+" Alias
+call fake#define('lipsum', 'fake#gen("paragraph")')
 
-" '' Get an age weighted by generation distribution
-" call fake#define('age', 'float2nr(floor(110 * fake#betapdf(1.0, 1.45)))')
+" Get an age weighted by generation distribution
+call fake#define('age', 'float2nr(floor(110 * fake#betapdf(1.0, 1.45)))')
 
-" '' Get a domain (ordered by number of websites)
-" call fake#define('gtld', 'fake#get(fake#load("gtld"),'
-"                         \ . 'fake#betapdf(0.2, 3.0))')
+" Get a domain (ordered by number of websites)
+call fake#define('gtld', 'fake#get(fake#load("gtld"),'
+                        \ . 'fake#betapdf(0.2, 3.0))')
 
-" call fake#define('email', 'tolower(substitute(printf("%s@%s.%s",'
-"                         \ . 'fake#gen("name"),'
-"                         \ . 'fake#gen("surname"),'
-"                         \ . 'fake#gen("gtld")), '\\s', '-', 'g'))')
+call fake#define('email', 'tolower(substitute(printf("%s@%s.%s",'
+                        \ . 'fake#gen("name"),'
+                        \ . 'fake#gen("surname"),'
+                        \ . 'fake#gen("gtld")), "\\s", "-", "g"))')
 
 
 
