@@ -21,12 +21,11 @@
 	"diagnostic.virtualText": false,
 	"codeLens.enable": false,
 	"diagnostic-languageserver.filetypes": {
-		"vim": "vint",
-		"markdown": "write-good",
-		"sh": "shellcheck",
-		"php": "phpstan"
+		"vim": "vint"
+		/* "markdown": "write-good", */
+		/* "sh": "shellcheck", */
 	},
-	"diagnostic.refreshOnInsertMode": false,
+	"diagnostic.refreshOnInsertMode": true,
 	"diagnostic-languageserver.linters": {
 		"vint": {
 			"command": "vint",
@@ -51,7 +50,6 @@
 	"prettier.eslintIntegration": true,
 	"suggest.noselect": false,
 	"suggest.autoTrigger": "always",
-	"coc.preferences.timeout": 1000,
 	"suggest.acceptSuggestionOnCommitCharacter": true,
 	"suggest.echodocSupport": true,
 	"eslint.autoFixOnSave": false,
@@ -60,22 +58,22 @@
 	},
 	"explorer.icon.enableNerdfont": true,
 	"cSpell.userWords": [
-    "Chargebacks",
-    "Linkify",
-    "TSYS",
-    "Unmount",
-    "Untracked",
-    "datasource",
-    "debounced",
-    "dropzone",
-    "ellipsize",
-    "financials",
-    "helpdesk",
-    "pacman",
-    "reseted",
-    "setted",
-    "uploader"
-  ],
+		"Chargebacks",
+		"Linkify",
+		"TSYS",
+		"Unmount",
+		"Untracked",
+		"datasource",
+		"debounced",
+		"dropzone",
+		"ellipsize",
+		"financials",
+		"helpdesk",
+		"pacman",
+		"reseted",
+		"setted",
+		"uploader"
+	],
 	"prettier.trailingComma": "none",
 	"prettier.singleQuote": true,
 	"prettier.printWidth": 100,

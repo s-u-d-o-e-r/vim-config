@@ -1,4 +1,4 @@
-let g:polyglot_disabled = ['css', 'javascript', 'typescript', 'javascriptreact']
+" let g:polyglot_disabled = ['css', 'javascript', 'typescript', 'javascriptreact']
 
 call plug#begin('~/.vim/plugged')
     Plug 'espizo/vim-gitcommit-issue-id'
@@ -119,6 +119,12 @@ call plug#begin('~/.vim/plugged')
     Plug 'christianchiarulli/nvcode-color-schemes.vim'
     "EditorConfig plugin for Vim
     Plug 'editorconfig/editorconfig-vim'
+    Plug 'haya14busa/incsearch.vim'
+    Plug 'haya14busa/incsearch-easymotion.vim'
+    Plug 'haya14busa/incsearch-fuzzy.vim'
+    Plug 'nvim-lua/popup.nvim'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
 call plug#end()
 
  call coc_plug#begin()
@@ -250,7 +256,7 @@ let g:ctrlp_extensions = [
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlPMRU'
 
- let g:hardtime_default_on = 1
+ let g:hardtime_default_on = 0
  let g:hardtime_ignore_buffer_patterns = [ 'coc-explorer', 'NERD.*' ]
  let g:hardtime_ignore_quickfix = 1
  let g:hardtime_allow_different_key = 1
@@ -266,16 +272,13 @@ if (has('termguicolors'))
  set termguicolors
 endif
 set clipboard=unnamedplus
-set number
 set noswapfile
-set smartcase
 set autoread
 set hidden
 set wildmenu
 set nohlsearch
 set autoindent
 set ruler
-set laststatus=2
 set confirm
 set backspace=indent,eol,start
 set backup
@@ -302,7 +305,6 @@ set guioptions-=r
 set guioptions-=L
 let g:python3_host_prog='/usr/local/bin/python3'
 set smartcase
-set noshowmode
 set noruler
 set laststatus=0
 set noshowcmd
@@ -397,6 +399,15 @@ function! s:gitUntracked()
     return map(files, "{'line': v:val, 'path': v:val}")
 endfunction
 
+function! s:incsearch_config(...) abort
+  return incsearch#util#deepextend(deepcopy({
+  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+  \   'keymap': {
+  \     "\<CR>": '<Over>(easymotion)'
+  \   },
+  \   'is_expr': 0
+  \ }), get(a:, 1, {}))
+endfunction
 
 "
 "
@@ -520,17 +531,28 @@ map <leader>fs :CocCommand eslint.executeAutofix<CR>
 map <silent> <leader>ff :call CocAction('format')<CR>
 map <leader>fa <leader>xs<leader>xf
 "Clap
-map <leader><leader>g :Clap grep<Cr>
+map <leader><leader>g :Clap grep2<Cr>
 map <leader><leader>f :Clap files<CR>
 map <leader><leader>p :Clap providers<CR>
+
+"telescope
+nnoremap<leader><leader>tf <cmd>Telescope find_files<cr>
+nnoremap <leader><leader>tg <cmd>Telescope live_grep<cr>
+" nnoremap <leader>b <cmd>Telescope buffers<cr>
+" nnoremap <leader>h <cmd>Telescope help_tags<cr>
 " Buffers delete
 nnoremap <silent> <C-q> :Bdelete menu<CR>
 "easy motion
-map <Leader> <Plug>(easymotion-prefix)
-noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
-" Gif config
+
 map  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
+
+map <Leader> <Plug>(easymotion-prefix)
+noremap <silent><expr><Space>/ incsearch#go(<SID>config_easyfuzzymotion())
+" noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
+
+" noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay': 1}))
+
 " These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
 " Without these mappings, `n` & `N` works fine. (These mappings just provide
 " " different highlight method and have some other features )
@@ -584,7 +606,7 @@ xmap <leader>q <plug>(QuickScopeToggle)
 
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
+" xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 
 
