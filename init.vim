@@ -60,7 +60,7 @@ call plug#begin('~/.vim/plugged')
     " Vim bundle for styled-components based javascript files.
     Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
     " A Vim plugin that provides GraphQL file detection, syntax highlighting, and indentation.
-    Plug 'jparise/vim-graphql'
+    " Plug 'jparise/vim-graphql'
     " Modern performant generic finder and dispatcher for Vim and NeoVim
     Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
     " Color scheme
@@ -101,7 +101,7 @@ call plug#begin('~/.vim/plugged')
     " " Vim plugin that provides additional text objects
     Plug 'wellle/targets.vim'
     " Color scheme
-    " Plug 'arcticicestudio/nord-vim'
+    Plug 'sainnhe/gruvbox-material'
     "Git branch search using ctrlp.vim.
     Plug 'imkmf/ctrlp-branches'
     "emmet-vim is a vim plug-in which provides support for expanding abbreviations similar to emmet.
@@ -116,7 +116,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
     "Blazing fast minimap for vim, powered by 🛰 code-minimap written in Rust
     " Plug 'wfxr/minimap.vim'
-    Plug 'christianchiarulli/nvcode-color-schemes.vim'
     "EditorConfig plugin for Vim
     Plug 'editorconfig/editorconfig-vim'
     Plug 'haya14busa/incsearch.vim'
@@ -125,6 +124,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim'
+    Plug 'yaegassy/coc-jsdoc', {'do': 'yarn install --frozen-lockfile'}
+    Plug 'Cybolic/palenight.vim'
 call plug#end()
 
  call coc_plug#begin()
@@ -157,6 +158,8 @@ call plug#end()
     CocPlug 'coc-flow'
     CocPlug 'coc-import-cost'
     CocPlug 'coc-pairs'
+    CocPlug 'coc-cssmodules'
+    CocPlug 'coc-htmlhint'
 call coc_plug#end()
 
 
@@ -234,7 +237,7 @@ let g:echodoc#type = 'popup'
 "airline config
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-let g:airline_theme='nord' "deus
+let g:airline_theme='gruvbox_material' "deus  nord
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
 let g:airline_left_sep = ''
@@ -263,7 +266,16 @@ let g:ctrlp_cmd = 'CtrlPMRU'
 
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.5 } }
 
-colorscheme nord "night-owl palenight nord onedark candid
+let g:material_style = 'palenight'
+
+let g:gruvbox_material_statusline_style = 'mix'
+let g:gruvbox_material_diagnostic_virtual_text = 'colored'
+let g:gruvbox_material_diagnostic_text_highlight = 1
+let g:gruvbox_material_transparent_background = 1
+let g:gruvbox_material_background = 'soft'
+let g:gruvbox_material_palette= "mix"
+
+colorscheme gruvbox-material "night-owl  nord onedark candid palenight gruvbox-material
 
 filetype indent plugin on
 syntax on
@@ -315,6 +327,7 @@ set undoreload=10000
 set backupdir=~/.local/share/nvim/backup
 set nobackup
 set nowritebackup
+set background=dark
 
 setlocal nobackup
 setlocal nowritebackup
@@ -446,12 +459,6 @@ endfunction
 "
 
 
-nnoremap  <C-J>  :m .+1<CR>==
-nnoremap  <C-K> :m .-2<CR>==
-inoremap  <C-J> <Esc>:m .+1<CR>==gi
-inoremap  <C-K> <Esc>:m .-2<CR>==gi
-vnoremap  <C-J> :m '>+1<CR>gv=gv
-vnoremap  <C-K> :m '<-2<CR>gv=gv
 
 vmap <leader>b <Plug>NameAssign
 " mapping for buffers control
@@ -537,7 +544,7 @@ map <leader><leader>p :Clap providers<CR>
 
 "telescope
 nnoremap<leader><leader>tf <cmd>Telescope find_files<cr>
-nnoremap <leader><leader>tg <cmd>Telescope live_grep<cr>
+nnoremap <leader><leader>tg <cmd>Telescope live_grep find_command=rg,--ignore<cr>
 " nnoremap <leader>b <cmd>Telescope buffers<cr>
 " nnoremap <leader>h <cmd>Telescope help_tags<cr>
 " Buffers delete
@@ -609,6 +616,23 @@ smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 " xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 
+
+
+nnoremap  <c-j>  :m .+1<CR>==
+nnoremap  <c-k> :m .-2<CR>==
+inoremap  <c-j> <Esc>:m .+1<CR>==gi
+inoremap  <c-k> <Esc>:m .-2<CR>==gi
+vnoremap  <c-j> :m '>+1<CR>gv=gv
+vnoremap  <c-k> :m '<-2<CR>gv=gv
+
+
+
+nnoremap <silent><expr> <down> coc#float#has_scroll() ? coc#float#scroll(1, 1) :"\<down>" 
+nnoremap <silent><expr> <up> coc#float#has_scroll() ? coc#float#scroll(0, 1) :"\<up>" 
+inoremap <silent><expr> <down> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1, 1)\<cr>" :"\<down>" 
+inoremap <silent><expr> <up> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0, 1)\<cr>" :"\<up>" 
+vnoremap <silent><expr> <down> coc#float#has_scroll() ? coc#float#scroll(1, 1) :"\<down>" 
+vnoremap <silent><expr> <up> coc#float#has_scroll() ? coc#float#scroll(0, 1) :"\<up>" 
 
 "
 "

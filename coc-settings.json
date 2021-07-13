@@ -18,12 +18,14 @@
 	"emmet.showExpandedAbbreviation": "never",
 	"git.enableGutters": true,
 	"git.addGBlameToVirtualText": true,
-	"diagnostic.virtualText": false,
-	"codeLens.enable": false,
+	"git.showCommitInFloating": true,
+	"git.addGBlameToBufferVar": true,
+	"diagnostic.virtualText": true,
+	"codeLens.enable": true,
 	"diagnostic-languageserver.filetypes": {
-		"vim": "vint"
-		/* "markdown": "write-good", */
-		/* "sh": "shellcheck", */
+		"vim": "vint",
+		"--markdown": "write-good",
+		"--sh": "shellcheck"
 	},
 	"diagnostic.refreshOnInsertMode": true,
 	"diagnostic-languageserver.linters": {
@@ -137,5 +139,12 @@
 		"reference": "\uf87a",
 		"typeParameter": "\uf278",
 		"default": "\uf29c"
+	},
+	"languageserver": {
+		"graphql": {
+			"command": "graphql-lsp",
+			"args": ["server", "-m", "stream"],
+			"filetypes": ["typescript", "typescriptreact", "graphql", "javascript", "javascriptreact"]
+		}
 	}
 }
